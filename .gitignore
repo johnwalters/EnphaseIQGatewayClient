@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /IQClientTests/appsettings.Development.json
+/IQClientSite/ClientApp/.angular
+/IQClientSite/appsettings.Development.json
