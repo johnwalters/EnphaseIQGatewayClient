@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQClientLib", "IQClientLib\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQClientTests", "IQClientTests\IQClientTests.csproj", "{CDBA9CA1-6CD7-4D91-9223-2E9776E055F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQClientSite", "IQClientSite\IQClientSite.csproj", "{AC02259E-D636-4DFC-807C-8831A2C91FD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CDBA9CA1-6CD7-4D91-9223-2E9776E055F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDBA9CA1-6CD7-4D91-9223-2E9776E055F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDBA9CA1-6CD7-4D91-9223-2E9776E055F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC02259E-D636-4DFC-807C-8831A2C91FD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC02259E-D636-4DFC-807C-8831A2C91FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC02259E-D636-4DFC-807C-8831A2C91FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC02259E-D636-4DFC-807C-8831A2C91FD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
