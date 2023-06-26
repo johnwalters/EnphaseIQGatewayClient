@@ -1,0 +1,1625 @@
+<div class="row">
+  <div class="col text-center">
+    <h1>Detailed IQ Gateway Requests</h1>
+  </div>
+</div>
+
+<div class="row mt-1">
+  <div class="col">
+    <button class="btn  btn-link" routerLink="/detail/inverters"> Inverters</button>
+  </div>
+  <div class="col">
+    <button class="btn  btn-link" routerLink="/detail/meters"> Meters</button>
+  </div>
+  <div class="col">
+    <button class="btn  btn-link" routerLink="/detail/meterreadings">Meter Readings</button>
+  </div>
+  <div class="col">
+    <button class="btn  btn-link" routerLink="/detail/status">Status</button>
+  </div>
+  <div class="col">
+    <button class="btn  btn-link" routerLink="/detail/consumption">Consumption</button>
+  </div>
+</div>
+
+
+<div class="row spinner-container-row">
+  <div class="col text-center">
+    <div class="d-flex justify-content-center" *ngIf="spinnerMessage">
+      <div class="spinner-border text-primary " role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="text-primary ms-2" role="status">
+        <span class="spinner-message">{{spinnerMessage}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row error-message">
+  <div class="col text-danger">
+    <span>{{errorMessage}}</span>
+  </div>
+</div>
+
+<div class="row mt-1">
+  <div class="col">
+    <button class="btn btn-primary btn small" *ngIf="selectedRequestType == RequestType.inverters"
+      (click)="getInverters()">Get Inverters</button>
+    <button class="btn btn-primary btn small" *ngIf="selectedRequestType == RequestType.meters"
+      (click)="getMeters()">Get Meters</button>
+    <button class="btn btn-primary btn small" *ngIf="selectedRequestType == RequestType.meterreadings"
+      (click)="getMeterReadings()">Get Meter Readings</button>
+    <button class="btn btn-primary btn small" *ngIf="selectedRequestType == RequestType.status"
+      (click)="getStatus()">Get Status</button>
+    <button class="btn btn-primary btn small" *ngIf="selectedRequestType == RequestType.consumption"
+      (click)="getConsumption()">Get Consumption</button>
+  </div>
+
+</div>
+
+<!-- inveters -->
+<div class="" *ngIf="selectedRequestType == RequestType.inverters">
+  <div class="row ">
+    <div class="col text-center">
+      <h3>Inverter Details</h3>
+    </div>
+  </div>
+  <div class="row " *ngFor="let item of inverters">
+    <div class="row mt-2">
+      <div class="col ">
+        <label>Serial Number</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.serialNumber}}</label>
+      </div>
+      <div class="col-9 ">
+
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>last Report Date</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{formatDate(item.lastReportDate)}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>last Report Watts</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.lastReportWatts}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Max Report Watts</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.maxReportWatts}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Dev Type</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.devType}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Status -->
+<div class="" *ngIf="selectedRequestType == RequestType.status">
+  <div class="row mt-2">
+    <div class="col text-center">
+      <h3>Status Details</h3>
+    </div>
+  </div>
+  <div class="status-container" >
+    <div class="row">
+      <div class="col-3 ">
+        <label>connection.mqtt_state</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.connection.mqtt_state}}</label>
+      </div>
+      <div class="col-6 "></div>
+    </div>
+    <div class="row">
+      <div class="col-3 ">
+        <label>connection.prov_state</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.connection.prov_state}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+    <div class="row">
+      <div class="col-3 ">
+        <label>connection.auth_state</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.connection.auth_state}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+    <div class="row">
+      <div class="col-3 ">
+        <label>connection.sc_stream</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.connection.sc_stream}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+    <div class="row">
+      <div class="col-3 ">
+        <label>connection.sc_debug</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.connection.sc_debug}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.last_update</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{formatDate(status.meters.last_update)}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.soc</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.soc}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.main_relay_state</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.main_relay_state}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.gen_relay_state</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.gen_relay_state}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.backup_bat_mode</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.backup_bat_mode}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.backup_soc</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.backup_soc}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.is_split_phase</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.is_split_phase}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.phase_count</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.phase_count}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.enc_agg_soc</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.enc_agg_soc}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.enc_agg_energy</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.enc_agg_energy}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.acb_agg_soc</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.acb_agg_soc}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 ">
+        <label>meters.acb_agg_energy</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{status.meters.acb_agg_energy}}</label>
+      </div>
+      <div class="col-9 "></div>
+    </div>
+  </div>
+
+  <!-- status meters pv -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_p_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_p_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_s_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_s_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_p_ph_a_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_p_ph_a_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_p_ph_b_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_p_ph_b_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_p_ph_c_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_p_ph_c_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_s_ph_a_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_s_ph_a_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_s_ph_b_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_s_ph_b_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_s_ph_c_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_s_ph_c_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <!-- --------------- -->
+
+
+  <!-- status meters storage -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_p_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_p_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_s_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_s_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_p_ph_a_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_p_ph_a_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_p_ph_b_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_p_ph_b_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_p_ph_c_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_p_ph_c_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_s_ph_a_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_s_ph_a_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_s_ph_b_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_s_ph_b_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_s_ph_c_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_s_ph_c_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <!-- --------------- -->
+  <!-- status meters storage -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_p_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_p_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_s_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_s_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_p_ph_a_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_p_ph_a_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_p_ph_b_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_p_ph_b_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_p_ph_c_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_p_ph_c_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_s_ph_a_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_s_ph_a_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_s_ph_b_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_s_ph_b_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_s_ph_c_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_s_ph_c_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <!-- --------------- -->
+
+
+
+
+  <!-- status meters load -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_p_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_p_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_s_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_s_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_p_ph_a_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_p_ph_a_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_p_ph_b_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_p_ph_b_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_p_ph_c_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_p_ph_c_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_s_ph_a_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_s_ph_a_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_s_ph_b_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_s_ph_b_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_s_ph_c_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_s_ph_c_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+
+
+
+  <!-- status meters generator -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_p_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_p_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_s_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_s_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_p_ph_a_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_p_ph_a_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_p_ph_b_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_p_ph_b_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_p_ph_c_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_p_ph_c_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_s_ph_a_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_s_ph_a_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_s_ph_b_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_s_ph_b_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_s_ph_c_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_s_ph_c_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>status.tasks.timestamp</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{formatDate(status.tasks.timestamp)}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>status.tasks.task_id</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.tasks.task_id}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <!-- status counters -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.main_CfgLoad</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.main_CfgLoad}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.main_CfgChanged</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.main_CfgChanged}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.main_taskUpdate</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.main_taskUpdate}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_publish</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_publish}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_respond</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_respond}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_msgarrvd</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_msgarrvd}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_create</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_create}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_setCallbacks</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_setCallbacks}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_connect</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_connect}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_connect_err</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_connect_err}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_subscribe</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_subscribe}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.sSL_Keys_Create</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.sSL_Keys_Create}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.sc_hdlDataPub</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.sc_hdlDataPub}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.sc_SendStreamCtrl</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.sc_SendStreamCtrl}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.sc_SendDemandRspCtrl</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.sc_SendDemandRspCtrl}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.rest_Status</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.rest_Status}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+</div>
+
+<!-- meters -->
+<div class="" *ngIf="selectedRequestType == RequestType.meters">
+  <div class="row ">
+    <div class="col text-center">
+      <h3>Meters Details</h3>
+    </div>
+  </div>
+  <div class="row " *ngFor="let item of meters">
+    <div class="row mt-2">
+      <div class="col ">
+        <label>EID</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.eid}}</label>
+      </div>
+      <div class="col-9 ">
+
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>State</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.state}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Measurement Type</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.measurementType}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Phase Mode</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.phaseMode}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Phase Count</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.phaseCount}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Metering Status</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.meteringStatus}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Status Flags</label>
+      </div>
+      <div class="row ">
+        <div class="col ">
+          &nbsp;<label class="value">{{getStatusFlags(item.statusFlags)}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- meter readings -->
+<div class="" *ngIf="selectedRequestType == RequestType.meterreadings">
+  <div class="row ">
+    <div class="col text-center">
+      <h3>Meter Reading Details</h3>
+    </div>
+  </div>
+  <div class="row " *ngFor="let item of meterReadings">
+    <div class="row mt-2">
+      <div class="col ">
+        <label>Meter EID</label>
+      </div>
+      <div class="col-2 ">
+        <label class="value">{{item.eid}}</label>
+      </div>
+      <div class="col-8">
+
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col ">
+        <label>Timestamp</label>
+      </div>
+      <div class="col-2 ">
+        <label class="value">{{formatDate(item.timestamp)}}</label>
+      </div>
+      <div class="col-8 ">
+
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Active Energy Delivered</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.actEnergyDlvd}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Active Energy Received</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.actEnergyRcvd}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Apparent Energy</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.apparentEnergy}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Reactive Energy Lagg</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.reactEnergyLagg}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Reactive Energy Lead</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.reactEnergyLead}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Instantaneous Demand</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.instantaneousDemand}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Active Power</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.activePower}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Apparent Power</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.apparentPower}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Reactive Power</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.reactivePower}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Power Factor</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.pwrFactor}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Voltage</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.voltage}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Current</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.current}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Frequency</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.freq}}</label>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-4 "></div>
+      <div class="col ">
+        <label>Channels</label>
+      </div>
+      <div class="row " *ngFor="let channel of item.channels">
+        <div class="col-6 "></div>
+        <div class="col ">
+
+          <div class="row mt-2">
+            <div class="col ">
+              <label>Channel EID</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.eid}}</label>
+            </div>
+            <div class="col-9 ">
+
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Timestamp</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{formatDate(channel.timestamp)}}</label>
+            </div>
+
+          </div>
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Active Energy Delivered</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.actEnergyDlvd}}</label>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Active Energy Received</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.actEnergyRcvd}}</label>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Apparent Energy</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.apparentEnergy}}</label>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Reactive Energy Lagg</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.reactEnergyLagg}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Reactive Energy Lead</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.reactEnergyLead}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Instantaneous Demand</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.instantaneousDemand}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Active Power</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.activePower}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Apparent Power</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.apparentPower}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Reactive Power</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.reactivePower}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Power Factor</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.pwrFactor}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Voltage</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.voltage}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Current</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.current}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Frequency</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{channel.freq}}</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- consumption -->
+<div class="" *ngIf="selectedRequestType == RequestType.consumption">
+  <div class="row ">
+    <div class="col text-center">
+      <h3>Consumption Details</h3>
+    </div>
+  </div>
+  <div class="row " *ngFor="let item of consumptions">
+
+
+    <div class="row mt-4">
+      <div class="col ">
+        <label>Report Type</label>
+      </div>
+      <div class="col-2 ">
+        <label class="value">{{item.reportType}}</label>
+      </div>
+      <div class="col-8 ">
+
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col ">
+        <label>Created At</label>
+      </div>
+      <div class="col-2 ">
+        <label class="value">{{formatDate(item.createdAt)}}</label>
+      </div>
+      <div class="col-8 ">
+
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Current Watts</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.currW}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Actutal Power</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.actPower}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Apparent Power</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.apprntPwr}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Reactive Power</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.reactPwr}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Cumulative Watt Hours Delivered</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.whDlvdCum}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Cumulative Watt Hours Received</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.whRcvdCum}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Cumulative varh Lag</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.varhLagCum}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Cumulative varhLead Lag</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.varhLeadCum}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Cumulative vah</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.vahCum}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Cumulative rms Voltage</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.rmsVoltage}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Cumulative rms Current</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.rmsCurrent}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Cumulative Power Factor</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.pwrFactor}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Cumulative Frequency Hz</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.cumulative.freqHz}}</label>
+      </div>
+    </div>
+
+
+
+
+    <div class="row mt-1">
+      <div class="col-6 "></div>
+      <div class="col ">
+        <label>Lines</label>
+      </div>
+      <div class="row mt-2" *ngFor="
+      let line of item.lines
+      let lineIndex = index
+      ">
+        <div class="col-6 "></div>
+        <label>Line&nbsp;{{lineIndex + 1}}</label>
+        <div class="col ">
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Current Watts</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.currW}}</label>
+            </div>
+
+          </div>
+
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Actual Power</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.actPower}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Apparrent Power</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.apprntPwr}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Reactive Power</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.reactPwr}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Cumulative Watt Hours Delivered</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.whDlvdCum}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Cumulative Watt Hours Received</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.whRcvdCum}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Cumulative varhLag</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.varhLagCum}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>varhLagCum varhLead</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.varhLeadCum}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>varhLagCum vah</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.vahCum}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>rms Voltage</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.rmsVoltage}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>rms Current</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.rmsCurrent}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Power Factor</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.pwrFactor}}</label>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-3 "></div>
+            <div class="col ">
+              <label>Frequency Hz</label>
+            </div>
+            <div class="col ">
+              <label class="value">{{line.freqHz}}</label>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-5 " *ngIf="rawData">
+  <div class="col ">
+    <button class="btn btn-success btn-small" (click)="isRawDataShowing = !isRawDataShowing">Toggle raw data</button>
+  </div>
+</div>
+<div class="row mt-2" *ngIf="isRawDataShowing">
+  <div class="col text-center">
+    <span>{{rawData}}</span>
+  </div>
+</div>

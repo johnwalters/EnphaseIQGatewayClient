@@ -1,4 +1,4 @@
-﻿namespace IQGatewayClientLib.Responses.Consumption
+﻿namespace IQClientLib.Responses.Consumption
 {
     public class Consumption
     {

@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col text-center">
+    <h1>Raw IQ Gateway Requests</h1>
+  </div>
+</div>
+<div class="row spinner-container-row">
+  <div class="col text-center">
+    <div class="d-flex justify-content-center" *ngIf="spinnerMessage">
+      <div class="spinner-border text-primary " role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="text-primary ms-2" role="status">
+        <span class="spinner-message">{{spinnerMessage}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-1">
+  <div class="col">
+    <button class="btn btn-primary btn small" (click)="getInverters()">Get Inverters</button>
+  </div>
+  <div class="col">
+    <button class="btn btn-primary btn small" (click)="getMeters()">Get Meters</button>
+  </div>
+  <div class="col">
+    <button class="btn btn-primary btn small" (click)="getMeterReadings()">Get Meter Readings</button>
+  </div>
+  <div class="col">
+    <button class="btn btn-primary btn small" (click)="getStatus()">Get Status</button>
+  </div>
+  <div class="col">
+    <button class="btn btn-primary btn small" (click)="getConsumption()">Get Consumption</button>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col text-center">
+    <span>{{rawData}}</span>
+  </div>
+</div>

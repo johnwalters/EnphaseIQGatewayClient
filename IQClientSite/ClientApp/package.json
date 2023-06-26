@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve --port 44410",
     "build": "ng build",
-    "build:ssr": "ng run IQClientSite:server:dev",
+    "build:ssr": "ng run iqclientsite:server:dev",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -22,6 +22,7 @@
     "@angular/router": "^14.1.3",
     "bootstrap": "^5.2.0",
     "jquery": "^3.6.0",
+    "moment-timezone": "^0.5.43",
     "oidc-client": "^1.11.5",
     "popper.js": "^1.16.0",
     "run-script-os": "^1.1.6",
@@ -46,6 +47,5 @@
   },
   "overrides": {
     "autoprefixer": "10.4.5"
-  },
-  "optionalDependencies": {}
+  }
 }

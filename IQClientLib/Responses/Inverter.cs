@@ -1,4 +1,4 @@
-﻿namespace IQGatewayClientLib.Responses
+﻿namespace IQClientLib.Responses
 {
     public class Inverter
     {

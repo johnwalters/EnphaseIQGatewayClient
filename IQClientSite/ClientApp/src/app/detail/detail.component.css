@@ -1,0 +1,11 @@
+div.spinner-container-row {
+  height: 3em;
+}
+
+label {
+  font-weight: bold;
+}
+
+label.value {
+  font-weight:normal;
+}

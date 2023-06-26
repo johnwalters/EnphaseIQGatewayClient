@@ -1,4 +1,4 @@
-﻿namespace IQGatewayClientLib.Responses.Status
+﻿namespace IQClientLib.Responses.Status
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class Connection

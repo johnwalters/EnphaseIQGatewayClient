@@ -1,21 +1,21 @@
-﻿using IQGatewayClientLib.Responses;
-using IQGatewayClientLib.Responses.Consumption;
-using IQGatewayClientLib.Responses.MeterReading;
-using IQGatewayClientLib.Responses.Status;
+﻿using IQClientLib.Responses;
+using IQClientLib.Responses.Consumption;
+using IQClientLib.Responses.MeterReading;
+using IQClientLib.Responses.Status;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IQGatewayClientSite.Controllers
+namespace IQClientSite.Controllers
 {
     public class IQApiController : Controller
     {
-        private IQGatewayClientLib.Client _iqClient;
+        private IQClientLib.Client _iqClient;
         private IConfiguration _configuration;
 
         public IQApiController(IConfiguration configuration)
         {
             var token = configuration["Token"];
             
-            _iqClient = new IQGatewayClientLib.Client(token);
+            _iqClient = new IQClientLib.Client(token);
         }
         public async Task<IActionResult> GetInverters()
         {

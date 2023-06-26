@@ -1,4 +1,4 @@
-﻿namespace IQGatewayClientLib.Responses.MeterReading
+﻿namespace IQClientLib.Responses.MeterReading
 {
     public class Channel
     {

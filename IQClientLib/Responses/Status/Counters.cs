@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace IQGatewayClientLib.Responses.Status
+namespace IQClientLib.Responses.Status
 {
     public class Counters
     {

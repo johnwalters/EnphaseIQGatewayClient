@@ -1,14 +1,28 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+<h1>Enphase IQ Gateway Client</h1>
+<p>This site provides the ability to talk to the Enphase IQ Gateway.</p>
+
+<p>Enphase IQ Gateway is a box that solar panel systems use to monitor the generation and consumption of power.</p>
+<p>You can submit requests to the IQ Gateway and receive JSON responses in a browser. For that you'll need an
+  authorization token. That is explained <a
+    href="https://enphase.com/download/accessing-iq-gateway-local-apis-or-local-ui-token-based-authentication"
+    target="_blank">here</a>.</p>
+
+<p>What this web client does is allow you to make the same requests, and it displays the responses in a more readable,
+  formatted way.</p>
+<p>You'll still need to <a
+    href="https://enphase.com/download/accessing-iq-gateway-local-apis-or-local-ui-token-based-authentication"
+    target="_blank">obtain an auth token</a>, and set it in the appsettings.json configuration file at the root of this
+  site.</p>
+
+
+<a class="nav-link text-primary" [routerLink]="['/detail']">IQ Requests</a>
+<div class="row mt-3">
+  <div class="col">
+    <p>You can get pretty much this same data online at <a
+    href="https://enlighten.enphaseenergy.com/"
+    target="_blank">enlighten.enphaseenergy.com</a>. The reason I wrote this is that often I find that the online service is showing me data from hours behind.</p>
+    <p>Still to come in future versions: Store the responses in a database, and a data collector that periodically
+      submits requests and stores the responses. Also some views in this site that show historical data.</p>
+
+  </div>
+</div>

@@ -1,4 +1,4 @@
-﻿using IQGatewayClientLib;
+﻿using IQClientLib;
 using NUnit.Framework;
 
 using Microsoft.Extensions.Configuration;

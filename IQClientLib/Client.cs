@@ -1,10 +1,10 @@
-﻿using IQGatewayClientLib.Responses;
-using IQGatewayClientLib.Responses.Consumption;
-using IQGatewayClientLib.Responses.MeterReading;
-using IQGatewayClientLib.Responses.Status;
+﻿using IQClientLib.Responses;
+using IQClientLib.Responses.Consumption;
+using IQClientLib.Responses.MeterReading;
+using IQClientLib.Responses.Status;
 using Newtonsoft.Json;
 
-namespace IQGatewayClientLib
+namespace IQClientLib
 {
     public class Client
     {

@@ -1,4 +1,4 @@
-﻿namespace IQGatewayClientLib.Responses.MeterReading
+﻿namespace IQClientLib.Responses.MeterReading
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
 
