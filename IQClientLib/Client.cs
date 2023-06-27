@@ -20,8 +20,7 @@ namespace IQClientLib
         }
         private async Task<string> GetLocalEnvoyJson(string urlSuffix)
         {
-            // https://stackoverflow.com/questions/9983265/the-remote-certificate-is-invalid-according-to-the-validation-procedure 
-            // https://support.enphase.com/s/question/0D53m00008vPvHLCA0/access-iq-gateway-through-curl-commands-with-tokenauthentication-only-allowed-for-some-urls-not-all-urls-giving-401-authorization-required-error-message
+            // TODO: add a local database https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/working-with-sql?view=aspnetcore-7.0&tabs=visual-studio
 
             try
             {
