@@ -1615,11 +1615,12 @@
 
 <div class="row mt-5 " *ngIf="rawData">
   <div class="col ">
-    <button class="btn btn-success btn-small" (click)="isRawDataShowing = !isRawDataShowing">Toggle raw data</button>
+    <button class="btn btn-primary btn-small" *ngIf="isRawDataShowing" (click)="isRawDataShowing = !isRawDataShowing">Hide Raw Data</button>
+    <button class="btn btn-primary btn-small" *ngIf="!isRawDataShowing" (click)="isRawDataShowing = !isRawDataShowing">Show Raw Data</button>
   </div>
 </div>
 <div class="row mt-2" *ngIf="isRawDataShowing">
-  <div class="col text-center">
+  <div class="col ">
     <span>{{rawData}}</span>
   </div>
 </div>

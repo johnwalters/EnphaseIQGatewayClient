@@ -9,12 +9,15 @@ namespace IQClientSite.Controllers
     public class IQApiController : Controller
     {
         private IQClientLib.Client _iqClient;
-        private IConfiguration _configuration;
+        private readonly string UNSET_TOKEN = "GETaTOKEN";
 
         public IQApiController(IConfiguration configuration)
         {
             var token = configuration["Token"];
-            
+            if (string.IsNullOrEmpty(token) || token == UNSET_TOKEN)
+            {
+                throw new ApplicationException($"Authentication token not set in appsettings file(s)");
+            }
             _iqClient = new IQClientLib.Client(token);
         }
         public async Task<IActionResult> GetInverters()
