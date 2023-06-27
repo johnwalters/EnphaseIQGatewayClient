@@ -14,3 +14,16 @@ You'll still need to [obtain an auth token](https://enphase.com/download/accessi
 You can get pretty much this same data online at [enlighten.enphaseenergy.com](https://enlighten.enphaseenergy.com/). The reason I wrote this is that often I find that the online service is showing me data from hours behind.
 
 Still to come in future versions: Store the responses in a database, and a data collector that periodically submits requests and stores the responses. Also some views in the site that show historical data.
+
+**Development**
+- IDE: Visual Studio 2022
+- Language: C# and TypeScript
+- SDK: .NET 7
+- Web: .NET Server, Angular Client
+
+
+**Build**
+
+Clone the repository recursively.
+Open EnphaseIQGatewayClient.sln in VS2022 and build the solution.
+
