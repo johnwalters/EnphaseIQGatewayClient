@@ -27,3 +27,7 @@ Still to come in future versions: Store the responses in a database, and a data 
 Clone the repository recursively.
 Open EnphaseIQGatewayClient.sln in VS2022 and build the solution.
 
+**Run Site in Dev Mode**
+
+Set IQClientSite project as start up project, and Start Debugging.
+
