@@ -8,7 +8,7 @@ You can submit requests to the IQ Gateway and receive JSON responses in a browse
 
 What this web client does is allow you to make the same requests, and it displays the responses in a more readable, formatted way.
 
-You'll still need to [obtain an auth token](https://enphase.com/download/accessing-iq-gateway-local-apis-or-local-ui-token-based-authentication), and set it in the appsettings.json configuration file at the root of the IQClientSite.
+You'll still need to [obtain an auth token](https://enphase.com/download/accessing-iq-gateway-local-apis-or-local-ui-token-based-authentication), and set it in the appsettings.json configuration file at the root of the IQClientSite project.
 
 
 You can get pretty much this same data online at [enlighten.enphaseenergy.com](https://enlighten.enphaseenergy.com/). The reason I wrote this is that often I find that the online service is showing me data from hours behind.
