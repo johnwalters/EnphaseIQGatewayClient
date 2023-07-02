@@ -25,9 +25,49 @@ namespace IQClientTests
         }
 
         [Test]
-        public void AddResponse()
+        public void AddInverterResponse()
         {
             var response = _client.GetInverters().Result;
+            Assert.IsNotNull((response));
+            var iqResponse = new IQResponse(response);
+            _repo.Insert(iqResponse);
+
+        }
+
+        [Test]
+        public void AddMetersResponse()
+        {
+            var response = _client.GetMeters().Result;
+            Assert.IsNotNull((response));
+            var iqResponse = new IQResponse(response);
+            _repo.Insert(iqResponse);
+
+        }
+
+        [Test]
+        public void AddMeterReadingsResponse()
+        {
+            var response = _client.GetMeterReadings().Result;
+            Assert.IsNotNull((response));
+            var iqResponse = new IQResponse(response);
+            _repo.Insert(iqResponse);
+
+        }
+
+        [Test]
+        public void AddStatusResponse()
+        {
+            var response = _client.GetStatus().Result;
+            Assert.IsNotNull((response));
+            var iqResponse = new IQResponse(response);
+            _repo.Insert(iqResponse);
+
+        }
+
+        [Test]
+        public void AddConsumptionResponse()
+        {
+            var response = _client.GetConsumption().Result;
             Assert.IsNotNull((response));
             var iqResponse = new IQResponse(response);
             _repo.Insert(iqResponse);
