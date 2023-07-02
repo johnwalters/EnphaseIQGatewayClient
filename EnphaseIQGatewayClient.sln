@@ -5,9 +5,14 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQClientLib", "IQClientLib\IQClientLib.csproj", "{5BC6BF43-0DA0-4901-9FDA-F3A15BB718F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQClientTests", "IQClientTests\IQClientTests.csproj", "{CDBA9CA1-6CD7-4D91-9223-2E9776E055F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQClientTests", "IQClientTests\IQClientTests.csproj", "{CDBA9CA1-6CD7-4D91-9223-2E9776E055F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQClientSite", "IQClientSite\IQClientSite.csproj", "{AC02259E-D636-4DFC-807C-8831A2C91FD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQClientSite", "IQClientSite\IQClientSite.csproj", "{AC02259E-D636-4DFC-807C-8831A2C91FD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1F70796C-0251-4A65-BF32-C1EB77354A37}"
+	ProjectSection(SolutionItems) = preProject
+		Database\DbScript.sql = Database\DbScript.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

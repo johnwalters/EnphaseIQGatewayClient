@@ -21,10 +21,14 @@ namespace IQClientLib.Database.Models
         public IQResponse(List<Inverter> inverters)
         {
             this.ResponseType = ResponseType.Inverters;
-            var date = new DateTime(inverters[0].lastReportDate);
-            this.InverterLastReportDate = date;
+            this.InverterLastReportDate = ConvertEpochDate(inverters[0].lastReportDate);
             this.ResponseJson = JsonConvert.SerializeObject(inverters);
 
+        }
+
+        public static DateTime ConvertEpochDate(long epochDate)
+        {
+            return DateTimeOffset.FromUnixTimeSeconds(epochDate).DateTime;
         }
 
     }

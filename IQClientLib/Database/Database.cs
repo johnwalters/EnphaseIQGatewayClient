@@ -31,7 +31,7 @@ namespace IQClientLib.Database
         }
 
         // ----------------------------------------------------------------------------------
-        public void AddResponse(IQResponse response)
+        public void AddResponseOld(IQResponse response)
         {
             var jsonData = JsonConvert.SerializeObject(response);
             var parms = new DynamicParameters();
@@ -55,6 +55,49 @@ namespace IQClientLib.Database
 
             SqlConnection.Execute("KeywordAnalysis_AddOrUpdate", parms, commandType: CommandType.StoredProcedure);
 
+        }
+
+        public void AddResponse(IQResponse response)
+        {
+            var jsonData = JsonConvert.SerializeObject(response);
+            var sqlTemplate = @"INSERT INTO [dbo].[IQResponse]
+           (ResponseType
+           ,CreateDate
+           ,InverterLastReportDate
+           ,MeterReadingTimestamp
+           ,MetersLastUpdate
+           ,ConsumptionReportCreatedAt
+           ,JsonData)
+     VALUES
+           ({ResponseType},
+            {@now}
+           ,{InverterLastReportDate}
+           ,{MeterReadingTimestamp}
+           ,{MetersLastUpdate}
+           ,{ConsumptionReportCreatedAt}
+           ,{JsonData} )";
+            var sql = sqlTemplate.Replace("{ResponseType}", ((int) response.ResponseType).ToString());
+            sql = sql.Replace("{@now}", FormatDateParameter(DateTime.Now) );
+            sql = sql.Replace("{InverterLastReportDate}", FormatDateParameter(response.InverterLastReportDate));
+            sql = sql.Replace("{MeterReadingTimestamp}", FormatDateParameter(response.MeterReadingTimestamp));
+            sql = sql.Replace("{MetersLastUpdate}", FormatDateParameter(response.MetersLastUpdate));
+            sql = sql.Replace("{ConsumptionReportCreatedAt}", FormatDateParameter(response.ConsumptionReportCreatedAt));
+            sql = sql.Replace("{JsonData}", WrapSingleQuotes(jsonData));
+
+            SqlConnection.Execute(sql);
+
+        }
+        private string FormatDateParameter(DateTime? date)
+        {
+            if (date.HasValue)
+            {
+                return WrapSingleQuotes(date.Value.ToString("yyyy-MM-dd hh:mm:ss"));
+            }
+            return "NULL";
+        }
+        private string WrapSingleQuotes(string value)
+        {
+            return "'" + value + "'";
         }
     }
 }

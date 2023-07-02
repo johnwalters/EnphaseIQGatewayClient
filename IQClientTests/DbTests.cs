@@ -24,6 +24,7 @@ namespace IQClientTests
             _repo = new IQResponseRepo(_connectionString);
         }
 
+        [Test]
         public void AddResponse()
         {
             var response = _client.GetInverters().Result;
