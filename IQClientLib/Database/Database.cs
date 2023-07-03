@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 using Newtonsoft.Json;
 using IQClientLib.Database.Models;
+using System.Linq;
 
 namespace IQClientLib.Database
 {
@@ -31,30 +32,23 @@ namespace IQClientLib.Database
         }
 
         // ----------------------------------------------------------------------------------
-        public void AddResponseOld(IQResponse response)
+        public IEnumerable<IQResponse> GetAllResponses(DateTime fromDate, DateTime toDate)
         {
-            var jsonData = JsonConvert.SerializeObject(response);
-            var parms = new DynamicParameters();
-            if(response.ResponseType == ResponseType.Inverters)
-            {
-                parms.Add("@InverterLastReportDate", response.InverterLastReportDate, dbType: DbType.DateTime);
-            }
-            if (response.ResponseType == ResponseType.MeterReadings)
-            {
-                parms.Add("@MeterReadingTimestamp", response.MeterReadingTimestamp, dbType: DbType.DateTime);
-            }
-            if (response.ResponseType == ResponseType.Status)
-            {
-                parms.Add("@MetersLastUpdate", response.MetersLastUpdate, dbType: DbType.DateTime);
-            }
-            if (response.ResponseType == ResponseType.Consumption)
-            {
-                parms.Add("@ConsumptionReportCreatedAt", response.ConsumptionReportCreatedAt, dbType: DbType.DateTime);
-            }
-            parms.Add("@JsonData", jsonData, dbType: DbType.String);
 
-            SqlConnection.Execute("KeywordAnalysis_AddOrUpdate", parms, commandType: CommandType.StoredProcedure);
+            var sqlTemplate = @"SELECT * FROM IQResponse 
+            WHERE 
+            CreateDate >= {fromDate} AND CreateDate <= {toDate}";
+            var sql = sqlTemplate.Replace("{fromDate}", FormatDateParameter(fromDate));
+            sql = sql.Replace("{toDate}", FormatDateParameter(toDate));
+            var dbEntity = SqlConnection.Query<IQResponse>(sql);
+            return dbEntity.AsEnumerable();
+        }
 
+        public void DeleteResponse(int id)
+        {
+            var sqlTemplate = @"DELETE IQResponse WHERE ID = {id}";
+            var sql = sqlTemplate.Replace("{id}", id.ToString());
+            SqlConnection.Execute(sql);
         }
 
         public void AddResponse(IQResponse response)

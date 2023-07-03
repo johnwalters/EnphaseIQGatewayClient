@@ -30,5 +30,15 @@ namespace IQClientLib.Database
         {
             this.Database.AddResponse(response);
         }
+
+        public void Delete(int id)
+        {
+            this.Database.DeleteResponse(id);
+        }
+
+        public IEnumerable<IQResponse> GetAllResponses(DateTime fromDate, DateTime toDate)
+        {
+            return this.Database.GetAllResponses(fromDate, toDate);
+        }
     }
 }
