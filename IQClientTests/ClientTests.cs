@@ -16,7 +16,7 @@ namespace IQGatewayClientTests
         {
             _config = InitConfiguration();
             _token = _config["Token"];
-            _client = new Client(_token);
+            _client = new Client(_token,"");
         }
 
         [Test]

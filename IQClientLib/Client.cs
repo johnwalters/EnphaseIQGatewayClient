@@ -1,4 +1,6 @@
-﻿using IQClientLib.Responses;
+﻿using IQClientLib.Database;
+using IQClientLib.Database.Models;
+using IQClientLib.Responses;
 using IQClientLib.Responses.Consumption;
 using IQClientLib.Responses.MeterReading;
 using IQClientLib.Responses.Status;
@@ -10,13 +12,20 @@ namespace IQClientLib
     {
 
         private string _localEnvoyToken = @"GET_A_TOKEN";
+        private string _connectionString = @"";
         private static readonly string _localEnvoyIpAddress = "envoy.local"; // or maybe the ip address. ex: 192.168.68.101
         private static readonly int _maxGetAttempts = 3;
         private static readonly int _attemptDelayTicks = 2000;
+        private IQResponseRepo _repo;
 
-        public Client(string token)
+        public Client(string token, string connectionString)
         {
             _localEnvoyToken = token;
+            if (!String.IsNullOrEmpty(connectionString))
+            {
+                _repo = new IQResponseRepo(connectionString);
+            }
+
         }
         private async Task<string> GetLocalEnvoyJson(string urlSuffix)
         {
@@ -111,27 +120,52 @@ namespace IQClientLib
 
         public async Task<List<Inverter>> GetInverters()
         {
-            return await this.GetResponse<List<Inverter>>("api/v1/production/inverters");
+            var apiResponse =  await this.GetResponse<List<Inverter>>("api/v1/production/inverters");
+            if (_repo!=null)
+            {
+                _repo.Insert(new IQResponse(apiResponse));
+            }
+            return apiResponse;
         }
 
         public async Task<List<Meter>> GetMeters()
         {
-            return await this.GetResponse<List<Meter>>("ivp/meters");
+            var apiResponse = await this.GetResponse<List<Meter>>("ivp/meters");
+            if (_repo != null)
+            {
+                _repo.Insert(new IQResponse(apiResponse));
+            }
+            return apiResponse;
         }
 
         public async Task<List<MeterReading>> GetMeterReadings()
         {
-            return await this.GetResponse<List<MeterReading>>("ivp/meters/readings");
+            var apiResponse = await this.GetResponse<List<MeterReading>>("ivp/meters/readings");
+            if (_repo != null)
+            {
+                _repo.Insert(new IQResponse(apiResponse));
+            }
+            return apiResponse;
         }
 
         public async Task<Status> GetStatus()
         {
-            return await this.GetResponse<Status>("ivp/livedata/status");
+            var apiResponse = await this.GetResponse<Status>("ivp/livedata/status");
+            if (_repo != null)
+            {
+                _repo.Insert(new IQResponse(apiResponse));
+            }
+            return apiResponse;
         }
 
         public async Task<List<Consumption>> GetConsumption()
         {
-            return await this.GetResponse<List<Consumption>>("ivp/meters/reports/consumption");
+            var apiResponse = await this.GetResponse<List<Consumption>>("ivp/meters/reports/consumption");
+            if (_repo != null)
+            {
+                _repo.Insert(new IQResponse(apiResponse));
+            }
+            return apiResponse;
         }
         
     }

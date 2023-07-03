@@ -20,7 +20,7 @@ namespace IQClientTests
             _config = InitConfiguration();
             _token = _config["Token"];
             _connectionString = _config["ConnectionStrings:DefaultConnection"];
-            _client = new Client(_token);
+            _client = new Client(_token,"");
             _repo = new IQResponseRepo(_connectionString);
         }
 

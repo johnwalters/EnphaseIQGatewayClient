@@ -14,11 +14,12 @@ namespace IQClientSite.Controllers
         public IQApiController(IConfiguration configuration)
         {
             var token = configuration["Token"];
+            var connectionString = configuration["ConnectionStrings:DefaultConnection"];
             if (string.IsNullOrEmpty(token) || token == UNSET_TOKEN)
             {
                 throw new ApplicationException($"Authentication token not set in appsettings file(s)");
             }
-            _iqClient = new IQClientLib.Client(token);
+            _iqClient = new IQClientLib.Client(token, connectionString);
         }
         public async Task<IActionResult> GetInverters()
         {
