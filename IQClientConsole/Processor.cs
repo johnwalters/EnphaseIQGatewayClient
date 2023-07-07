@@ -37,32 +37,53 @@ namespace IQClientConsole
             Console.WriteLine(new IQResponse(statusResponse).JsonData + "\n");
 
             WriteMessage("Getting Consumption response.");
-            var consumptionResponse = _client.GetConsumption().Result; 
+            var consumptionResponse = _client.GetConsumption().Result;
             Console.WriteLine(new IQResponse(consumptionResponse).JsonData + "\n");
         }
 
         public void GetInverters()
         {
             WriteMessage("Getting Inverters response.");
-            var inverterResponse = _client.GetInverters().Result;
-            Console.WriteLine(new IQResponse(inverterResponse).JsonData + "\n");
+            try
+            {
+                var inverterResponse = _client.GetInverters().Result;
+                Console.WriteLine(new IQResponse(inverterResponse).JsonData + "\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occurred {ex}");
+            }
 
-           
+
         }
 
         public void GetMeters()
         {
             WriteMessage("Getting Meters response.");
-            var meterResponse = _client.GetMeters().Result;
-            Console.WriteLine(new IQResponse(meterResponse).JsonData + "\n");
+            try
+            {
+                var meterResponse = _client.GetMeters().Result;
+                Console.WriteLine(new IQResponse(meterResponse).JsonData + "\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occurred {ex}");
+            }
 
         }
 
         public void GetMeterReadings()
         {
             WriteMessage("Getting Meter Readings response.");
-            var meterReadingResponse = _client.GetMeterReadings().Result;
-            Console.WriteLine(new IQResponse(meterReadingResponse).JsonData + "\n");
+            try
+            {
+                var meterReadingResponse = _client.GetMeterReadings().Result;
+                Console.WriteLine(new IQResponse(meterReadingResponse).JsonData + "\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occurred {ex}");
+            }
 
         }
 
@@ -70,15 +91,29 @@ namespace IQClientConsole
         {
 
             WriteMessage("Getting Status response.");
-            var statusResponse = _client.GetStatus().Result;
-            Console.WriteLine(new IQResponse(statusResponse).JsonData + "\n");
+            try
+            {
+                var statusResponse = _client.GetStatus().Result;
+                Console.WriteLine(new IQResponse(statusResponse).JsonData + "\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occurred {ex}");
+            }
         }
 
         public void GetConsumption()
         {
             WriteMessage("Getting Consumption response.");
-            var consumptionResponse = _client.GetConsumption().Result;
-            Console.WriteLine(new IQResponse(consumptionResponse).JsonData + "\n");
+            try
+            {
+                var consumptionResponse = _client.GetConsumption().Result;
+                Console.WriteLine(new IQResponse(consumptionResponse).JsonData + "\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occurred {ex}");
+            }
         }
 
         private void WriteMessage(string message, bool addPressCtrlCToCancelMessage = false)

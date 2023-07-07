@@ -85,7 +85,7 @@ namespace IQClientLib.Database
         {
             if (date.HasValue)
             {
-                return WrapSingleQuotes(date.Value.ToString("yyyy-MM-dd hh:mm:ss"));
+                return WrapSingleQuotes(date.Value.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             return "NULL";
         }
