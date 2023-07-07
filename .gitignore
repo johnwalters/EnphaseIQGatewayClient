@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /IQClientTests/appsettings.Development.json
 /IQClientSite/ClientApp/.angular
 /IQClientSite/appsettings.Development.json
+/IQClientConsole/appsettings.Development.json
