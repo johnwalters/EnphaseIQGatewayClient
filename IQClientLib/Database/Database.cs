@@ -32,13 +32,20 @@ namespace IQClientLib.Database
         }
 
         // ----------------------------------------------------------------------------------
-        public IEnumerable<IQResponse> GetAllResponses(DateTime fromDate, DateTime toDate)
+        public IEnumerable<IQResponse> GetAllResponses(ResponseType? responseType, DateTime fromDate, DateTime toDate)
         {
-
+            var responseTypeClause = "";
+            if (responseType.HasValue)
+            {
+                responseTypeClause = $"ResponseType = {(int) responseType} AND ";
+            }
             var sqlTemplate = @"SELECT * FROM IQResponse 
             WHERE 
+            {responseTypeClause}
             CreateDate >= {fromDate} AND CreateDate <= {toDate}";
-            var sql = sqlTemplate.Replace("{fromDate}", FormatDateParameter(fromDate));
+            
+            var sql = sqlTemplate.Replace("{responseTypeClause}", responseTypeClause);
+            sql = sql.Replace("{fromDate}", FormatDateParameter(fromDate));
             sql = sql.Replace("{toDate}", FormatDateParameter(toDate));
             var dbEntity = SqlConnection.Query<IQResponse>(sql);
             return dbEntity.AsEnumerable();
@@ -81,6 +88,8 @@ namespace IQClientLib.Database
             SqlConnection.Execute(sql);
 
         }
+
+        
         private string FormatDateParameter(DateTime? date)
         {
             if (date.HasValue)

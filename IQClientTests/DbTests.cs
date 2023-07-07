@@ -33,10 +33,10 @@ namespace IQClientTests
             var beforeInsert = DateTime.Now;
             _repo.Insert(iqResponse);
             var afterInsert = DateTime.Now;
-            var entries = _repo.GetAllResponses(beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Inverters);
+            var entries = _repo.GetAllResponses(ResponseType.Inverters, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Inverters);
             Assert.IsTrue(entries.Count() == 1);
             _repo.Delete(entries.ToList()[0].Id);
-            entries = _repo.GetAllResponses(beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Inverters);
+            entries = _repo.GetAllResponses(ResponseType.Inverters, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Inverters);
             Assert.IsTrue(entries.Count() == 0);
 
         }
@@ -50,10 +50,10 @@ namespace IQClientTests
             var beforeInsert = DateTime.Now;
             _repo.Insert(iqResponse);
             var afterInsert = DateTime.Now;
-            var entries = _repo.GetAllResponses(beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Meters);
+            var entries = _repo.GetAllResponses(ResponseType.Meters, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Meters);
             Assert.IsTrue(entries.Count() == 1);
             _repo.Delete(entries.ToList()[0].Id);
-            entries = _repo.GetAllResponses(beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Meters);
+            entries = _repo.GetAllResponses(ResponseType.Meters, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Meters);
             Assert.IsTrue(entries.Count() == 0);
 
 
@@ -68,10 +68,10 @@ namespace IQClientTests
             var beforeInsert = DateTime.Now;
             _repo.Insert(iqResponse);
             var afterInsert = DateTime.Now;
-            var entries = _repo.GetAllResponses(beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.MeterReadings);
+            var entries = _repo.GetAllResponses(ResponseType.MeterReadings, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.MeterReadings);
             Assert.IsTrue(entries.Count() == 1);
             _repo.Delete(entries.ToList()[0].Id);
-            entries = _repo.GetAllResponses(beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.MeterReadings);
+            entries = _repo.GetAllResponses(ResponseType.MeterReadings, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.MeterReadings);
             Assert.IsTrue(entries.Count() == 0);
 
         }
@@ -85,10 +85,10 @@ namespace IQClientTests
             var beforeInsert = DateTime.Now;
             _repo.Insert(iqResponse);
             var afterInsert = DateTime.Now;
-            var entries = _repo.GetAllResponses(beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Status);
+            var entries = _repo.GetAllResponses(ResponseType.Status, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Status);
             Assert.IsTrue(entries.Count() == 1);
             _repo.Delete(entries.ToList()[0].Id);
-            entries = _repo.GetAllResponses(beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Status);
+            entries = _repo.GetAllResponses(ResponseType.Status, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Status);
             Assert.IsTrue(entries.Count() == 0);
 
         }
@@ -102,10 +102,10 @@ namespace IQClientTests
             var beforeInsert = DateTime.Now;
             _repo.Insert(iqResponse);
             var afterInsert = DateTime.Now;
-            var entries = _repo.GetAllResponses(beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Consumption);
+            var entries = _repo.GetAllResponses(ResponseType.Consumption, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Consumption);
             Assert.IsTrue(entries.Count() == 1);
             _repo.Delete(entries.ToList()[0].Id);
-            entries = _repo.GetAllResponses(beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Consumption);
+            entries = _repo.GetAllResponses(ResponseType.Consumption, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Consumption);
             Assert.IsTrue(entries.Count() == 0);
 
         }
