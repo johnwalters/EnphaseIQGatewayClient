@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from './HttpService';
 import { Observable } from 'rxjs';
-import { GetConsumptionResponse, GetInvertersResponse, GetMeterReadingsResponse, GetMetersResponse, GetStatusResponse } from './IQResponses/IQApiResponse';
-
+import { GetAllResponsesResponse, GetConsumptionResponse, GetInvertersResponse, GetMeterReadingsResponse, GetMetersResponse, GetStatusResponse } from './IQResponses/IQApiResponse';
+import { ResponseType } from './ResponseType';
 
 
 
@@ -43,5 +43,14 @@ export class IqService {
 
   getConsumption(): Observable<GetConsumptionResponse> {
     return this.httpService.get<GetConsumptionResponse>('GetConsumption');
+  }
+
+  getHistory(responseType:ResponseType, fromDate:Date, toDate:Date): Observable<GetAllResponsesResponse> {
+    const uploadData = new FormData();
+    uploadData.append('responseType', responseType.toString() )
+    uploadData.append('fromDate', fromDate.toString() )
+    uploadData.append('toDate', toDate.toString() )
+
+    return this.httpService.post<any>('GetHistory', uploadData);
   }
 }

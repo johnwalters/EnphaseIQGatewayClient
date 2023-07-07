@@ -1,4 +1,5 @@
-﻿using IQClientLib.Responses;
+﻿using IQClientLib.Database.Models;
+using IQClientLib.Responses;
 using IQClientLib.Responses.Consumption;
 using IQClientLib.Responses.MeterReading;
 using IQClientLib.Responses.Status;
@@ -111,6 +112,24 @@ namespace IQClientSite.Controllers
                 return response;
             }
         }
+
+        public async Task<IActionResult> GetHistory(ResponseType? responseType, DateTime fromDate, DateTime toDate )
+        {
+            try
+            {
+                var iqResponses = await _iqClient.GetAllResponses(responseType, fromDate, toDate);
+                var response = new GetAllResponsesResponse() { IsSuccessful = true, Payload = iqResponses.ToList() };
+                response.IsSuccessful = iqResponses != null;
+                var jsonResponse = Json(response);
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"exception occurred in IQApiController.GetHistory() - {ex}");
+                var response = Json(new GetAllResponsesResponse() { IsSuccessful = false });
+                return response;
+            }
+        }
     }
 
     public class IQApiResponse
@@ -140,6 +159,11 @@ namespace IQClientSite.Controllers
     public class GetConsumptionResponse : IQApiResponse
     {
         public List<Consumption>? Payload { get; set; }
+    }
+
+    public class GetAllResponsesResponse : IQApiResponse
+    {
+        public List<IQResponse>? Payload { get; set; }
     }
 
 

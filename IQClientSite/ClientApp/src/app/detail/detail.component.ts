@@ -7,6 +7,7 @@ import { Status } from '../IQResponses/Status/Status';
 import { Consumption } from '../IQResponses/Consumption/Consumption';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment-timezone';
+import { ResponseType } from '../ResponseType';
 
 enum RequestType {
   inverters,
@@ -121,6 +122,38 @@ export class DetailComponent implements OnInit {
       if (resp.isSuccessful) {
         this.consumptions = resp.payload;
         console.debug(this.consumptions);
+      } else {
+        this.errorMessage = 'Request failed. Check Logs.'
+      }
+      this.spinnerMessage = '';
+    });
+  }
+
+  getAllConsumption(): void {
+    this.spinnerMessage = 'submitting getHistory call';
+    this.errorMessage = '';
+    let fromDate = moment("20230101").toDate();
+    let toDate = moment("20231231").toDate();
+    this.service.getHistory(ResponseType.consumption, fromDate, toDate).subscribe((resp) => {
+      this.rawData = JSON.stringify(resp);
+      if (resp.isSuccessful) {
+        // this.consumptions = resp.payload;
+        // console.debug(this.consumptions);
+      } else {
+        this.errorMessage = 'Request failed. Check Logs.'
+      }
+      this.spinnerMessage = '';
+    });
+  }
+
+  getHistory(responseType:ResponseType, fromDate:Date, toDate:Date): void {
+    this.spinnerMessage = 'submitting getHistory call';
+    this.errorMessage = '';
+    this.service.getHistory(responseType, fromDate, toDate).subscribe((resp) => {
+      this.rawData = JSON.stringify(resp);
+      if (resp.isSuccessful) {
+        // this.consumptions = resp.payload;
+        // console.debug(this.consumptions);
       } else {
         this.errorMessage = 'Request failed. Check Logs.'
       }

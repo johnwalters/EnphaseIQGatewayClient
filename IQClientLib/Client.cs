@@ -12,7 +12,6 @@ namespace IQClientLib
     {
 
         private string _localEnvoyToken = @"GET_A_TOKEN";
-        private string _connectionString = @"";
         private static readonly string _localEnvoyIpAddress = "envoy.local"; // or maybe the ip address. ex: 192.168.68.101
         private static readonly int _maxGetAttempts = 3;
         private static readonly int _attemptDelayTicks = 2000;
@@ -29,7 +28,6 @@ namespace IQClientLib
         }
         private async Task<string> GetLocalEnvoyJson(string urlSuffix)
         {
-            // TODO: add a local database https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/working-with-sql?view=aspnetcore-7.0&tabs=visual-studio
 
             try
             {
@@ -167,7 +165,18 @@ namespace IQClientLib
             }
             return apiResponse;
         }
-        
+
+        public async Task<IEnumerable<IQResponse>> GetAllResponses(ResponseType? responseType, DateTime fromDate, DateTime toDate)
+        {
+            //TODO: GetAllResponses should probably not be a client responsibility
+            if (_repo != null)
+            {
+                return _repo.GetAllResponses(responseType, fromDate, toDate);
+            }
+            return new List<IQResponse>().AsEnumerable();
+            
+        }
+
     }
 
 }
