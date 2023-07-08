@@ -124,7 +124,7 @@ namespace IQClientSite.Controllers
                 var consumptionList = new List<Consumption>();
                 foreach(var iq in iqResponses)
                 {
-                    var iqConsumptions = iq.ToConsumptions();
+                    List<Consumption> iqConsumptions = (List<Consumption>) iq.ToRawResponse(ResponseType.Consumption);
                     foreach(var iqC in iqConsumptions)
                     {
                         if(iqC.reportType == "total-consumption")

@@ -122,7 +122,7 @@ namespace IQClientTests
             var entries = _repo.GetAllResponses(ResponseType.Consumption, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Consumption).ToList();
             Assert.IsTrue(entries.Count() == 1);
             var consumptionResponseFromDb = entries[0];
-            var cr2 = consumptionResponseFromDb.ToConsumptions();
+            var cr2 = consumptionResponseFromDb.ToRawResponse(ResponseType.Consumption);
             Assert.IsNotNull(cr2);
         }
 

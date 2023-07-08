@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 using Microsoft.Extensions.Configuration;
 using IQClientLib.Database.Models;
+using IQClientLib.Responses.Consumption;
 
 namespace IQGatewayClientTests
 {
@@ -66,7 +67,7 @@ namespace IQGatewayClientTests
             var consumptionResponse = _client.GetConsumption().Result;
             Assert.IsNotNull((consumptionResponse));
             var iqR = new IQResponse(consumptionResponse);
-            var cr2 = iqR.ToConsumptions();
+            var cr2 = iqR.ToRawResponse(ResponseType.Consumption);
         }
 
         private static IConfiguration InitConfiguration()

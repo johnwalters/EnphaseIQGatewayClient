@@ -60,11 +60,58 @@ namespace IQClientLib.Database.Models
             return DateTimeOffset.FromUnixTimeSeconds(epochDate).DateTime;
         }
 
-        public List<Consumption> ToConsumptions()
+        //public List<Consumption> ToConsumptions()
+        //{
+        //    var c = JsonConvert.DeserializeObject<List<Consumption>>(this.JsonData);
+        //    return c;
+        //}
+
+        public object ToRawResponse(ResponseType responseType)
         {
-            var c = JsonConvert.DeserializeObject<List<Consumption>>(this.JsonData);
-            return c;
+            if (String.IsNullOrEmpty(this.JsonData)) return null;
+            object rawResponse;
+            switch (responseType)
+            {
+                case ResponseType.Inverters:
+                    {
+                        rawResponse = JsonConvert.DeserializeObject<List<Inverter>>(this.JsonData);
+                        break;
+                    }
+                case ResponseType.Meters:
+                    {
+                        rawResponse = JsonConvert.DeserializeObject<List<Meters>>(this.JsonData);
+                        break;
+                    }
+                case ResponseType.MeterReadings:
+                    {
+                        rawResponse = JsonConvert.DeserializeObject<List<MeterReading>>(this.JsonData);
+                        break;
+                    }
+                case ResponseType.Status:
+                    {
+                        rawResponse = JsonConvert.DeserializeObject<Status>(this.JsonData);
+                        break;
+                    }
+                case ResponseType.Consumption:
+                    {
+                        rawResponse = JsonConvert.DeserializeObject<List<Consumption>>(this.JsonData);
+                        break;
+                    }
+                default:
+                    {
+                        rawResponse = JsonConvert.DeserializeObject<List<Inverter>>(this.JsonData);
+                        break;
+                    }
+
+
+            }
+            return rawResponse;
         }
+        //public object ToType<T>()
+        //{
+        //    var rawResponse = JsonConvert.DeserializeObject<T>(this.JsonData);
+        //    return rawResponse;
+        //}
 
     }
 
