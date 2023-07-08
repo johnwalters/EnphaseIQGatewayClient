@@ -4,6 +4,7 @@ import { HttpService } from './HttpService';
 import { Observable } from 'rxjs';
 import { GetAllResponsesResponse, GetConsumptionResponse, GetInvertersResponse, GetMeterReadingsResponse, GetMetersResponse, GetStatusResponse } from './IQResponses/IQApiResponse';
 import { ResponseType } from './ResponseType';
+import * as moment from 'moment';
 
 
 
@@ -46,10 +47,12 @@ export class IqService {
   }
 
   getHistory(responseType:ResponseType, fromDate:Date, toDate:Date): Observable<GetAllResponsesResponse> {
+    let fromDateFmatted = moment(fromDate).format('YYYY-MM-DD HH:mm:ss');
+    let toDateFormatted = moment(toDate).format('YYYY-MM-DD HH:mm:ss');
     const uploadData = new FormData();
     uploadData.append('responseType', responseType.toString() )
-    uploadData.append('fromDate', fromDate.toString() )
-    uploadData.append('toDate', toDate.toString() )
+    uploadData.append('fromDate', fromDateFmatted )
+    uploadData.append('toDate', toDateFormatted )
 
     return this.httpService.post<any>('GetHistory', uploadData);
   }

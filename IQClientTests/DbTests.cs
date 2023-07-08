@@ -110,7 +110,23 @@ namespace IQClientTests
 
         }
 
-       
+        [Test]
+        public void GetSerializedConsumptionResponseFromDb()
+        {
+            var response = _client.GetConsumption().Result;
+            Assert.IsNotNull((response));
+            var iqResponse = new IQResponse(response);
+            var beforeInsert = DateTime.Now;
+            _repo.Insert(iqResponse);
+            var afterInsert = DateTime.Now;
+            var entries = _repo.GetAllResponses(ResponseType.Consumption, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Consumption).ToList();
+            Assert.IsTrue(entries.Count() == 1);
+            var consumptionResponseFromDb = entries[0];
+            var cr2 = consumptionResponseFromDb.ToConsumptions();
+            Assert.IsNotNull(cr2);
+        }
+
+
 
         private static IConfiguration InitConfiguration()
         {

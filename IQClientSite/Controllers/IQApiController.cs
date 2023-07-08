@@ -113,12 +113,28 @@ namespace IQClientSite.Controllers
             }
         }
 
-        public async Task<IActionResult> GetHistory(ResponseType? responseType, DateTime fromDate, DateTime toDate )
+        public async Task<IActionResult> GetHistory(ResponseType? responseType, string fromDate, string toDate )
         {
             try
             {
-                var iqResponses = await _iqClient.GetAllResponses(responseType, fromDate, toDate);
-                var response = new GetAllResponsesResponse() { IsSuccessful = true, Payload = iqResponses.ToList() };
+                DateTime.TryParse(fromDate, out DateTime from);
+                DateTime.TryParse(toDate, out DateTime to);
+                var iqResponses = await _iqClient.GetAllResponses(responseType, from, to);
+                // filter to just total_consumption report types
+                var consumptionList = new List<Consumption>();
+                foreach(var iq in iqResponses)
+                {
+                    var iqConsumptions = iq.ToConsumptions();
+                    foreach(var iqC in iqConsumptions)
+                    {
+                        if(iqC.reportType == "total-consumption")
+                        {
+                            consumptionList.Add(iqC);
+                        }
+                    }
+                }
+
+                var response = new GetConsumptionResponse() { IsSuccessful = true, Payload = consumptionList };
                 response.IsSuccessful = iqResponses != null;
                 var jsonResponse = Json(response);
                 return jsonResponse;
@@ -126,7 +142,7 @@ namespace IQClientSite.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine($"exception occurred in IQApiController.GetHistory() - {ex}");
-                var response = Json(new GetAllResponsesResponse() { IsSuccessful = false });
+                var response = Json(new GetConsumptionResponse() { IsSuccessful = false });
                 return response;
             }
         }

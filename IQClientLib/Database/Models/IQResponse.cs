@@ -60,6 +60,12 @@ namespace IQClientLib.Database.Models
             return DateTimeOffset.FromUnixTimeSeconds(epochDate).DateTime;
         }
 
+        public List<Consumption> ToConsumptions()
+        {
+            var c = JsonConvert.DeserializeObject<List<Consumption>>(this.JsonData);
+            return c;
+        }
+
     }
 
    

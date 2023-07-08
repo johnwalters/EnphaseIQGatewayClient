@@ -60,7 +60,6 @@ namespace IQClientLib.Database
 
         public void AddResponse(IQResponse response)
         {
-            var jsonData = JsonConvert.SerializeObject(response);
             var sqlTemplate = @"INSERT INTO [dbo].[IQResponse]
            (ResponseType
            ,CreateDate
@@ -76,14 +75,14 @@ namespace IQClientLib.Database
            ,{MeterReadingTimestamp}
            ,{MetersLastUpdate}
            ,{ConsumptionReportCreatedAt}
-           ,{JsonData} )";
+           ,'{JsonData}' )";
             var sql = sqlTemplate.Replace("{ResponseType}", ((int) response.ResponseType).ToString());
             sql = sql.Replace("{@now}", FormatDateParameter(DateTime.Now) );
             sql = sql.Replace("{InverterLastReportDate}", FormatDateParameter(response.InverterLastReportDate));
             sql = sql.Replace("{MeterReadingTimestamp}", FormatDateParameter(response.MeterReadingTimestamp));
             sql = sql.Replace("{MetersLastUpdate}", FormatDateParameter(response.MetersLastUpdate));
             sql = sql.Replace("{ConsumptionReportCreatedAt}", FormatDateParameter(response.ConsumptionReportCreatedAt));
-            sql = sql.Replace("{JsonData}", WrapSingleQuotes(jsonData));
+            sql = sql.Replace("{JsonData}", response.JsonData);
 
             SqlConnection.Execute(sql);
 
