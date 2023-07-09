@@ -46,7 +46,8 @@ export class IqService {
     return this.httpService.get<GetConsumptionResponse>('GetConsumption');
   }
 
-  getHistory(responseType:ResponseType, fromDate:Date, toDate:Date): Observable<GetAllResponsesResponse> {
+
+  getConsumptionHistory(responseType:ResponseType, fromDate:Date, toDate:Date): Observable<GetConsumptionResponse> {
     let fromDateFmatted = moment(fromDate).format('YYYY-MM-DD HH:mm:ss');
     let toDateFormatted = moment(toDate).format('YYYY-MM-DD HH:mm:ss');
     const uploadData = new FormData();
@@ -56,4 +57,5 @@ export class IqService {
 
     return this.httpService.post<any>('GetHistory', uploadData);
   }
+
 }

@@ -16,6 +16,14 @@ enum RequestType {
   status,
   consumption,
 }
+
+export class ConsumptionModel {
+  createdAt: number;
+  reportType: string;
+  whDlvdCum: number;
+  wattHoursDeliveredSincePrevious: number;
+  wattHoursDeliveredSinceFirst: number;
+}
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -32,6 +40,7 @@ export class DetailComponent implements OnInit {
   meterReadings: MeterReading[];
   status: Status;
   consumptions: Consumption[];
+  consumptionHistoryModelList: ConsumptionModel[];
   isRawDataShowing = false;
 
   private sub: any;
@@ -129,16 +138,15 @@ export class DetailComponent implements OnInit {
     });
   }
 
-  getAllConsumption(): void {
+  getConsumptionHistory(): void {
     this.spinnerMessage = 'submitting getHistory call';
     this.errorMessage = '';
     let fromDate = moment("20230101").toDate();
     let toDate = moment("20231231").toDate();
-    this.service.getHistory(ResponseType.consumption, fromDate, toDate).subscribe((resp) => {
+    this.service.getConsumptionHistory(ResponseType.consumption, fromDate, toDate).subscribe((resp) => {
       this.rawData = JSON.stringify(resp);
       if (resp.isSuccessful) {
-        // this.consumptions = resp.payload;
-        // console.debug(this.consumptions);
+        this.buildConsumptionHistoryModelList(resp.payload);
       } else {
         this.errorMessage = 'Request failed. Check Logs.'
       }
@@ -146,20 +154,35 @@ export class DetailComponent implements OnInit {
     });
   }
 
-  getHistory(responseType:ResponseType, fromDate:Date, toDate:Date): void {
-    this.spinnerMessage = 'submitting getHistory call';
-    this.errorMessage = '';
-    this.service.getHistory(responseType, fromDate, toDate).subscribe((resp) => {
-      this.rawData = JSON.stringify(resp);
-      if (resp.isSuccessful) {
-        // this.consumptions = resp.payload;
-        // console.debug(this.consumptions);
+  buildConsumptionHistoryModelList(consumptionList:Array<Consumption>):void{
+    this.consumptionHistoryModelList = new Array<ConsumptionModel>;
+    let firstWattHoursDelivered = 0;
+    let previousWattHoursDelivered = 0;
+    for(let item of consumptionList){
+      let consumptionModel = new ConsumptionModel();
+      consumptionModel.createdAt = item.createdAt;
+      consumptionModel.reportType = item.reportType;
+      consumptionModel.whDlvdCum = item.cumulative.whDlvdCum;
+      if(firstWattHoursDelivered){
+        consumptionModel.wattHoursDeliveredSinceFirst = consumptionModel.whDlvdCum - firstWattHoursDelivered;
       } else {
-        this.errorMessage = 'Request failed. Check Logs.'
+        consumptionModel.wattHoursDeliveredSinceFirst = 0;
+        firstWattHoursDelivered = consumptionModel.whDlvdCum;
       }
-      this.spinnerMessage = '';
-    });
+
+      if(previousWattHoursDelivered){
+        consumptionModel.wattHoursDeliveredSincePrevious = consumptionModel.whDlvdCum - previousWattHoursDelivered;
+      } else {
+        consumptionModel.wattHoursDeliveredSincePrevious = 0;
+
+      }
+      previousWattHoursDelivered = consumptionModel.whDlvdCum;
+
+      this.consumptionHistoryModelList.push(consumptionModel);
+    }
   }
+
+
 
   getStatusFlags(statusFlags: string[]): string {
     let concatedFlags = '';
