@@ -15,12 +15,43 @@
   site.</p>
 
 
-<a class="nav-link text-primary" [routerLink]="['/detail']">IQ Requests</a>
+
+<div class="row">
+  <div class="col">
+    <a class="nav-link text-primary" [routerLink]="['/detail']">IQ Requests </a>
+
+  </div>
+  <div class="col">
+    - Submit Requests on demand
+
+  </div>
+  <div class="col-6">
+
+
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <a class="nav-link text-primary" [routerLink]="['/consumptions']">Consumptions </a>
+
+  </div>
+  <div class="col">
+    - List of historical consumption items
+
+  </div>
+  <div class="col-6">
+
+
+  </div>
+</div>
+
 <div class="row mt-3">
   <div class="col">
-    <p>You can get pretty much this same data online at <a
-    href="https://enlighten.enphaseenergy.com/"
-    target="_blank">enlighten.enphaseenergy.com</a>. The reason I wrote this is that often I find that the online service is showing me data from hours behind.</p>
+    <p>You can get pretty much this same data online at <a href="https://enlighten.enphaseenergy.com/"
+        target="_blank">enlighten.enphaseenergy.com</a>. The reason I wrote this is that often I find that the online
+      service is showing me data from hours behind.</p>
     <p>Still to come in future versions: Store the responses in a database, and a data collector that periodically
       submits requests and stores the responses. Also some views in this site that show historical data.</p>
 

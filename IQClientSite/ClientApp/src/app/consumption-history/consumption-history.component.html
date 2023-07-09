@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col text-center">
+    <h1 class="text-primary">Consumption History</h1>
+  </div>
+</div>
+
+<div class="row mt-5 " >
+  <div class="col ">
+    <button class="btn btn-primary btn-small"  (click)="getConsumptionHistory()">Get Consumption History</button>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table
+      class="table table-bordered table.responsive-sm"
+      *ngIf="consumptionHistoryModelList"
+    >
+      <tr>
+        <th>Date</th>
+        <th>WH Delivered</th>
+        <th>WH Delivered Since Previous</th>
+        <th>WH Delivered Since First</th>
+      </tr>
+      <tr *ngFor="let item of consumptionHistoryModelList">
+        <td>
+          {{formatDate(item.createdAt)}}
+        </td>
+        <td>
+          {{item.whDlvdCum | number: "1.2-2"}}
+        </td>
+        <td>
+          {{item.wattHoursDeliveredSincePrevious | number: "1.2-2"}}
+        </td>
+        <td>
+          {{item.wattHoursDeliveredSinceFirst | number: "1.2-2"}}
+        </td>
+      </tr>
+</table>
