@@ -17,12 +17,16 @@
       *ngIf="consumptionHistoryModelList"
     >
       <tr>
+        <th>Id</th>
         <th>Date</th>
         <th>WH Delivered</th>
         <th>WH Delivered Since Previous</th>
         <th>WH Delivered Since First</th>
       </tr>
       <tr *ngFor="let item of consumptionHistoryModelList">
+        <td>
+          {{item.iqId}}
+        </td>
         <td>
           {{formatDate(item.createdAt)}}
         </td>

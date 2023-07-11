@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { IqService } from '../iq.service';
-import { Consumption } from '../IQResponses/Consumption/Consumption';
+import { Consumption, ConsumptionDb } from '../IQResponses/Consumption/Consumption';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment-timezone';
 import { ResponseType } from '../ResponseType';
 
 export class ConsumptionModel {
+  iqId: number;
   createdAt: number;
   reportType: string;
   whDlvdCum: number;
@@ -52,12 +53,13 @@ export class ConsumptionHistoryComponent implements OnInit {
     });
   }
 
-  buildConsumptionHistoryModelList(consumptionList:Array<Consumption>):void{
+  buildConsumptionHistoryModelList(consumptionList:Array<ConsumptionDb>):void{
     this.consumptionHistoryModelList = new Array<ConsumptionModel>;
     let firstWattHoursDelivered = 0;
     let previousWattHoursDelivered = 0;
     for(let item of consumptionList){
       let consumptionModel = new ConsumptionModel();
+      consumptionModel.iqId = item.iqId;
       consumptionModel.createdAt = item.createdAt;
       consumptionModel.reportType = item.reportType;
       consumptionModel.whDlvdCum = item.cumulative.whDlvdCum;

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from './HttpService';
 import { Observable } from 'rxjs';
-import { GetAllResponsesResponse, GetConsumptionResponse, GetInvertersResponse, GetMeterReadingsResponse, GetMetersResponse, GetStatusResponse } from './IQResponses/IQApiResponse';
+import { GetAllResponsesResponse, GetConsumptionDbResponse, GetConsumptionResponse, GetInvertersResponse, GetMeterReadingsResponse, GetMetersResponse, GetStatusResponse } from './IQResponses/IQApiResponse';
 import { ResponseType } from './ResponseType';
 import * as moment from 'moment';
 
@@ -47,7 +47,7 @@ export class IqService {
   }
 
 
-  getConsumptionHistory(responseType:ResponseType, fromDate:Date, toDate:Date): Observable<GetConsumptionResponse> {
+  getConsumptionHistory(responseType:ResponseType, fromDate:Date, toDate:Date): Observable<GetConsumptionDbResponse> {
     let fromDateFmatted = moment(fromDate).format('YYYY-MM-DD HH:mm:ss');
     let toDateFormatted = moment(toDate).format('YYYY-MM-DD HH:mm:ss');
     const uploadData = new FormData();

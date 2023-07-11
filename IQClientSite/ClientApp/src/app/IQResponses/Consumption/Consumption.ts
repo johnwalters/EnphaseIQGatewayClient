@@ -9,3 +9,7 @@ export class Consumption {
   cumulative: Cumulative;
   lines: Line[];
 }
+
+export class ConsumptionDb extends Consumption {
+  iqId: number;
+}

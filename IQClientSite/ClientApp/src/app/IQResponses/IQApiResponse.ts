@@ -1,4 +1,4 @@
-import { Consumption } from "./Consumption/Consumption";
+import { Consumption, ConsumptionDb } from "./Consumption/Consumption";
 import { IQResponse } from "./IQResponse";
 import { Inverter } from "./Inverter";
 import { Meter } from "./Meter";
@@ -27,6 +27,10 @@ export class GetStatusResponse extends IQApiResponse {
 
 export class GetConsumptionResponse extends IQApiResponse {
   payload:Consumption[];
+}
+
+export class GetConsumptionDbResponse extends IQApiResponse {
+  payload:ConsumptionDb[];
 }
 
 export class GetAllResponsesResponse extends IQApiResponse {

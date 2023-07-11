@@ -121,20 +121,22 @@ namespace IQClientSite.Controllers
                 DateTime.TryParse(toDate, out DateTime to);
                 var iqResponses = await _iqClient.GetAllResponses(responseType, from, to);
                 // filter to just total_consumption report types
-                var consumptionList = new List<Consumption>();
-                foreach(var iq in iqResponses)
+                List<ConsumptionDb> consumptionDbList = new List<ConsumptionDb>();
+                foreach (var iq in iqResponses)
                 {
                     List<Consumption> iqConsumptions = (List<Consumption>) iq.ToRawResponse(ResponseType.Consumption);
-                    foreach(var iqC in iqConsumptions)
+                    
+                    foreach (var iqC in iqConsumptions)
                     {
                         if(iqC.reportType == "total-consumption")
                         {
-                            consumptionList.Add(iqC);
+                            var consumptionDb = new ConsumptionDb(iq.Id, iqC);
+                            consumptionDbList.Add(consumptionDb);
                         }
                     }
                 }
 
-                var response = new GetConsumptionResponse() { IsSuccessful = true, Payload = consumptionList };
+                var response = new GetConsumptionDbResponse() { IsSuccessful = true, Payload = consumptionDbList };
                 response.IsSuccessful = iqResponses != null;
                 var jsonResponse = Json(response);
                 return jsonResponse;
@@ -175,6 +177,11 @@ namespace IQClientSite.Controllers
     public class GetConsumptionResponse : IQApiResponse
     {
         public List<Consumption>? Payload { get; set; }
+    }
+
+    public class GetConsumptionDbResponse : IQApiResponse
+    {
+        public List<ConsumptionDb>? Payload { get; set; }
     }
 
     public class GetAllResponsesResponse : IQApiResponse
