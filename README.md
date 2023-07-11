@@ -13,7 +13,9 @@ You'll still need to [obtain an auth token](https://enphase.com/download/accessi
 
 You can get pretty much this same data online at [enlighten.enphaseenergy.com](https://enlighten.enphaseenergy.com/). The reason I wrote this is that often I find that the online service is showing me data from hours behind.
 
-Still to come in future versions: Store the responses in a database, and a data collector that periodically submits requests and stores the responses. Also some views in the site that show historical data.
+Other current features: 
+- Storing the responses in a database (currently a MS-SQL Server db, either local or out in Azure cloud)
+- A console app that serves as a data collector, repeatedly requesting responses from IQ Gateway on a periodic basis. (like every 5 minutes, which is how often the values are updated)
 
 **Development**
 - IDE: Visual Studio 2022
