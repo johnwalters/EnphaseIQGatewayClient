@@ -35,6 +35,7 @@ export class ConsumptionHistoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getConsumptionHistory();
   }
 
   getConsumptionHistory(): void {

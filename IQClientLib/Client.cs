@@ -46,13 +46,13 @@ namespace IQClientLib
                     response.EnsureSuccessStatusCode(); // Throws an exception if the response is not successful
                     return await response.Content.ReadAsStringAsync();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine($"Error occurred: {ex.Message}");
-                 throw ex;
+                    throw ex;
                 }
 
-                
+
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace IQClientLib
             return null;
         }
 
-        private async Task<HttpResponseMessage> GetResponseFromServer (HttpClient client, string apiUrl)
+        private async Task<HttpResponseMessage> GetResponseFromServer(HttpClient client, string apiUrl)
         {
             var attempts = 0;
             var isAttempting = true;
@@ -94,7 +94,7 @@ namespace IQClientLib
                     {
                         throw ex;
                     }
-                    
+
                 }
             }
             return null;
@@ -109,7 +109,7 @@ namespace IQClientLib
             {
                 Console.WriteLine(jsonResponse);
                 var inverterList = JsonConvert.DeserializeObject<T>(jsonResponse);
-                
+
                 return inverterList;
             }
             return default(T);
@@ -118,8 +118,8 @@ namespace IQClientLib
 
         public async Task<List<Inverter>> GetInverters()
         {
-            var apiResponse =  await this.GetResponse<List<Inverter>>("api/v1/production/inverters");
-            if (_repo!=null)
+            var apiResponse = await this.GetResponse<List<Inverter>>("api/v1/production/inverters");
+            if (_repo != null)
             {
                 _repo.Insert(new IQResponse(apiResponse));
             }
@@ -174,8 +174,40 @@ namespace IQClientLib
                 return _repo.GetAllResponses(responseType, fromDate, toDate);
             }
             return new List<IQResponse>().AsEnumerable();
-            
+
         }
+
+        public IQResponse GetResponse(int id)
+        {
+            //TODO: GetResponse should probably not be a client responsibility
+            if (_repo != null)
+            {
+                return _repo.GetResponse(id);
+            }
+            return null;
+
+        }
+
+        public List<ConsumptionDb> GetConsumptionDb(int id)
+        {
+            //TODO: GetResponse should probably not be a client responsibility
+
+            var iqResponse = this.GetResponse(id);
+            List<Consumption> iqResponses = (List<Consumption>)iqResponse.ToRawResponse(ResponseType.Consumption);
+
+            List<ConsumptionDb> consumptionDbList = new List<ConsumptionDb>();
+            foreach (var iq in iqResponses)
+            {
+                var consumptionDb = new ConsumptionDb(id, iq);
+                consumptionDbList.Add(consumptionDb);
+            }
+            return consumptionDbList;
+
+
+
+        }
+
+
 
     }
 

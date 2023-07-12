@@ -20,7 +20,7 @@ namespace IQClientTests
             _config = InitConfiguration();
             _token = _config["Token"];
             _connectionString = _config["ConnectionStrings:DefaultConnection"];
-            _client = new Client(_token,"");
+            _client = new Client(_token, _connectionString);
             _repo = new IQResponseRepo(_connectionString);
         }
 
@@ -107,6 +107,28 @@ namespace IQClientTests
             _repo.Delete(entries.ToList()[0].Id);
             entries = _repo.GetAllResponses(ResponseType.Consumption, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Consumption);
             Assert.IsTrue(entries.Count() == 0);
+
+        }
+
+        [Test]
+        public void GetConsumptionDbResponse()
+        {
+            var response = _client.GetConsumption().Result;
+            Assert.IsNotNull((response));
+            var iqResponse = new IQResponse(response);
+            var beforeInsert = DateTime.Now;
+            _repo.Insert(iqResponse);
+            var afterInsert = DateTime.Now;
+            var iqEntries = _repo.GetAllResponses(ResponseType.Consumption, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Consumption).ToList();
+            Assert.IsTrue(iqEntries.Count() >= 1);
+            var dbConsumptions = _client.GetConsumptionDb(iqEntries[0].Id);
+            Assert.IsNotNull(dbConsumptions);
+            Assert.That(dbConsumptions.Count() > 0);
+
+            _repo.Delete(iqEntries.ToList()[0].Id);
+            iqEntries = _repo.GetAllResponses(ResponseType.Consumption, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Consumption).ToList();
+            Assert.IsTrue(iqEntries.Count() == 0);
+
 
         }
 

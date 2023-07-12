@@ -51,6 +51,18 @@ namespace IQClientLib.Database
             return dbEntity.AsEnumerable();
         }
 
+        public IQResponse GetResponse(int id)
+        {
+
+            var sqlTemplate = @"SELECT * FROM IQResponse 
+            WHERE 
+            Id = {id}";
+
+            var sql = sqlTemplate.Replace("{id}", id.ToString());
+            var dbEntity = SqlConnection.QueryFirst<IQResponse>(sql);
+            return dbEntity;
+        }
+
         public void DeleteResponse(int id)
         {
             var sqlTemplate = @"DELETE IQResponse WHERE ID = {id}";

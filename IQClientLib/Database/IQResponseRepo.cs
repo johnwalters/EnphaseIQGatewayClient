@@ -36,6 +36,11 @@ namespace IQClientLib.Database
             this.Database.DeleteResponse(id);
         }
 
+        public IQResponse GetResponse(int id)
+        {
+            return this.Database.GetResponse(id);
+        }
+
         public IEnumerable<IQResponse> GetAllResponses(ResponseType? responseType, DateTime fromDate, DateTime toDate)
         {
             return this.Database.GetAllResponses(responseType, fromDate, toDate);

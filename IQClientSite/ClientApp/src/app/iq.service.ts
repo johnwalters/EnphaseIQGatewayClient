@@ -46,6 +46,10 @@ export class IqService {
     return this.httpService.get<GetConsumptionResponse>('GetConsumption');
   }
 
+  getConsumptionDb(id:number): Observable<GetConsumptionDbResponse> {
+    return this.httpService.get<GetConsumptionDbResponse>('GetConsumptionDb?id=' + id);
+  }
+
 
   getConsumptionHistory(responseType:ResponseType, fromDate:Date, toDate:Date): Observable<GetConsumptionDbResponse> {
     let fromDateFmatted = moment(fromDate).format('YYYY-MM-DD HH:mm:ss');

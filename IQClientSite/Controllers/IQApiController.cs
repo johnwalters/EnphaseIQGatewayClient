@@ -148,6 +148,25 @@ namespace IQClientSite.Controllers
                 return response;
             }
         }
+
+        public async Task<IActionResult> GetConsumptionDb(int id)
+        {
+            try
+            {
+                var consumptionDbList = _iqClient.GetConsumptionDb(id);
+
+                var response = new GetConsumptionDbResponse() { IsSuccessful = true, Payload = consumptionDbList };
+                response.IsSuccessful = consumptionDbList != null;
+                var jsonResponse = Json(response);
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"exception occurred in IQApiController.GetConsumptionDb() - {ex}");
+                var response = Json(new GetConsumptionResponse() { IsSuccessful = false });
+                return response;
+            }
+        }
     }
 
     public class IQApiResponse

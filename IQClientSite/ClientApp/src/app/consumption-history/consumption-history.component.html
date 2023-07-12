@@ -4,12 +4,12 @@
   </div>
 </div>
 
-<div class="row mt-5 " >
+<!-- <div class="row mt-5 " >
   <div class="col ">
     <button class="btn btn-primary btn-small"  (click)="getConsumptionHistory()">Get Consumption History</button>
 
   </div>
-</div>
+</div> -->
 <div class="row">
   <div class="col">
     <table
@@ -25,7 +25,8 @@
       </tr>
       <tr *ngFor="let item of consumptionHistoryModelList">
         <td>
-          {{item.iqId}}
+          <a  routerLink="/dbdetail/{{ item.iqId }}"
+          >{{item.iqId}}</a>
         </td>
         <td>
           {{formatDate(item.createdAt)}}

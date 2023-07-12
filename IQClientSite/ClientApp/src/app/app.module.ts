@@ -12,6 +12,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { RawComponent } from './raw/raw.component';
 import { DetailComponent } from './detail/detail.component';
 import { ConsumptionHistoryComponent } from './consumption-history/consumption-history.component';
+import { DbDetailComponent } from './db-detail/db-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ConsumptionHistoryComponent } from './consumption-history/consumption-h
     FetchDataComponent,
     RawComponent,
     DetailComponent,
-    ConsumptionHistoryComponent
+    ConsumptionHistoryComponent,
+    DbDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,6 +39,8 @@ import { ConsumptionHistoryComponent } from './consumption-history/consumption-h
       { path: 'detail', component: DetailComponent },
       { path: 'detail/:action', component: DetailComponent },
       { path: 'consumptions', component: ConsumptionHistoryComponent },
+      { path: 'dbdetail/:id', component: DbDetailComponent },
+      { path: 'dbdetail', component: DbDetailComponent },
     ])
   ],
   providers: [],
