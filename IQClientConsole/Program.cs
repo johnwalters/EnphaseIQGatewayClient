@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        private static readonly int _waitBetweenAllRequestsSeconds = 300;
+        private static readonly int _waitBetweenAllRequestsSeconds = 900;
         private static readonly int _waitBetweenEachRequestSeconds = 10;
         private static readonly TimeOnly _startTimeOfDay = new TimeOnly(7, 00);
         private static readonly TimeOnly _endTimeOfDay = new TimeOnly(21, 00);

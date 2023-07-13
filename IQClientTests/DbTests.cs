@@ -3,6 +3,7 @@ using IQClientLib.Database;
 using IQClientLib.Database.Models;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
+using System.Net;
 
 namespace IQClientTests
 {
@@ -13,6 +14,7 @@ namespace IQClientTests
         private string _connectionString = "";
         private Client _client;
         private IQResponseRepo _repo;
+        private IQService _service;
 
         [SetUp]
         public void Setup()
@@ -22,6 +24,7 @@ namespace IQClientTests
             _connectionString = _config["ConnectionStrings:DefaultConnection"];
             _client = new Client(_token, _connectionString);
             _repo = new IQResponseRepo(_connectionString);
+            _service = new IQService(_connectionString);
         }
 
         [Test]
@@ -121,7 +124,7 @@ namespace IQClientTests
             var afterInsert = DateTime.Now;
             var iqEntries = _repo.GetAllResponses(ResponseType.Consumption, beforeInsert, afterInsert).Where(e => e.ResponseType == ResponseType.Consumption).ToList();
             Assert.IsTrue(iqEntries.Count() >= 1);
-            var dbConsumptions = _client.GetConsumptionDb(iqEntries[0].Id);
+            var dbConsumptions = _service.GetConsumptionDb(iqEntries[0].Id);
             Assert.IsNotNull(dbConsumptions);
             Assert.That(dbConsumptions.Count() > 0);
 

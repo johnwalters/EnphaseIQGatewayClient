@@ -1,4 +1,5 @@
-﻿using IQClientLib.Database.Models;
+﻿using IQClientLib;
+using IQClientLib.Database.Models;
 using IQClientLib.Responses;
 using IQClientLib.Responses.Consumption;
 using IQClientLib.Responses.MeterReading;
@@ -10,6 +11,7 @@ namespace IQClientSite.Controllers
     public class IQApiController : Controller
     {
         private IQClientLib.Client _iqClient;
+        private IQService _service;
         private readonly string UNSET_TOKEN = "GETaTOKEN";
 
         public IQApiController(IConfiguration configuration)
@@ -21,7 +23,9 @@ namespace IQClientSite.Controllers
                 throw new ApplicationException($"Authentication token not set in appsettings file(s)");
             }
             _iqClient = new IQClientLib.Client(token, connectionString);
+            _service = new IQService(connectionString);
         }
+
         public async Task<IActionResult> GetInverters()
         {
             try
@@ -113,30 +117,27 @@ namespace IQClientSite.Controllers
             }
         }
 
-        public async Task<IActionResult> GetHistory(ResponseType? responseType, string fromDate, string toDate )
+        public async Task<IActionResult> GetConsumptionHistory(string fromDate, string toDate )
         {
             try
             {
                 DateTime.TryParse(fromDate, out DateTime from);
                 DateTime.TryParse(toDate, out DateTime to);
-                var iqResponses = await _iqClient.GetAllResponses(responseType, from, to);
+                var iqResponses = _service.GetAllResponses(ResponseType.Consumption, from, to);
                 // filter to just total_consumption report types
-                List<ConsumptionDb> consumptionDbList = new List<ConsumptionDb>();
+                List<Consumption> consumptionList = new List<Consumption>();
                 foreach (var iq in iqResponses)
                 {
                     List<Consumption> iqConsumptions = (List<Consumption>) iq.ToRawResponse(ResponseType.Consumption);
-                    
-                    foreach (var iqC in iqConsumptions)
+                    iqConsumptions = iqConsumptions.Where(c => c.reportType == "total-consumption").ToList();
+                    foreach (var iqItem in iqConsumptions)
                     {
-                        if(iqC.reportType == "total-consumption")
-                        {
-                            var consumptionDb = new ConsumptionDb(iq.Id, iqC);
-                            consumptionDbList.Add(consumptionDb);
-                        }
+                        iqItem.Id = iq.Id;
                     }
+                    consumptionList.AddRange(iqConsumptions);
                 }
 
-                var response = new GetConsumptionDbResponse() { IsSuccessful = true, Payload = consumptionDbList };
+                var response = new GetConsumptionResponse() { IsSuccessful = true, Payload = consumptionList };
                 response.IsSuccessful = iqResponses != null;
                 var jsonResponse = Json(response);
                 return jsonResponse;
@@ -153,10 +154,61 @@ namespace IQClientSite.Controllers
         {
             try
             {
-                var consumptionDbList = _iqClient.GetConsumptionDb(id);
+                var consumptionDbList = _service.GetConsumptionDb(id);
 
-                var response = new GetConsumptionDbResponse() { IsSuccessful = true, Payload = consumptionDbList };
+                var response = new GetConsumptionResponse() { IsSuccessful = true, Payload = consumptionDbList };
                 response.IsSuccessful = consumptionDbList != null;
+                var jsonResponse = Json(response);
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"exception occurred in IQApiController.GetConsumptionDb() - {ex}");
+                var response = Json(new GetConsumptionResponse() { IsSuccessful = false });
+                return response;
+            }
+        }
+
+        public async Task<IActionResult> GetInverterHistory(string fromDate, string toDate)
+        {
+            try
+            {
+                DateTime.TryParse(fromDate, out DateTime from);
+                DateTime.TryParse(toDate, out DateTime to);
+                var iqResponses = _service.GetAllResponses(ResponseType.Inverters, from, to);
+                // filter to just total_consumption report types
+                List<Inverter> inverterList = new List<Inverter>();
+                foreach (var iq in iqResponses)
+                {
+                    List<Inverter> iqInverters = (List<Inverter>)iq.ToRawResponse(ResponseType.Inverters);
+                    foreach (var iqItem in iqInverters)
+                    {
+                        iqItem.Id = iq.Id;
+                    }
+                    inverterList.AddRange(iqInverters);
+                }
+
+                var response = new GetInvertersResponse() { IsSuccessful = true, Payload = inverterList };
+                response.IsSuccessful = iqResponses != null;
+                var jsonResponse = Json(response);
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"exception occurred in IQApiController.GetInverterHistory() - {ex}");
+                var response = Json(new GetConsumptionResponse() { IsSuccessful = false });
+                return response;
+            }
+        }
+
+        public async Task<IActionResult> GetInverterDb(int id)
+        {
+            try
+            {
+                var inverterDbList = _service.GetInverterDb(id);
+
+                var response = new GetInvertersResponse() { IsSuccessful = true, Payload = inverterDbList };
+                response.IsSuccessful = inverterDbList != null;
                 var jsonResponse = Json(response);
                 return jsonResponse;
             }

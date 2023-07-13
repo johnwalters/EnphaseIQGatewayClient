@@ -1,7 +1,10 @@
-﻿namespace IQClientLib.Responses.Status
+﻿using IQClientLib.Database.Models;
+
+namespace IQClientLib.Responses.Status
 {
-    public class Meters
+    public class Meters 
     {
+        public int Id { get; set; }
         public int last_update { get; set; }
         public int soc { get; set; }
         public int main_relay_state { get; set; }

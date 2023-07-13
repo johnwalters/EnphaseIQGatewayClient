@@ -1,10 +1,13 @@
-﻿namespace IQClientLib.Responses.MeterReading
+﻿using IQClientLib.Database;
+
+namespace IQClientLib.Responses.MeterReading
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
 
 
-    public class MeterReading
+    public class MeterReading 
     {
+        public int Id { get; set; }
         public int eid { get; set; }
         public int timestamp { get; set; }
         public double actEnergyDlvd { get; set; }

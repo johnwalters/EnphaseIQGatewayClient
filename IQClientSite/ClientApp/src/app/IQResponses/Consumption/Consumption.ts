@@ -4,6 +4,7 @@ import { Line } from "./Line";
 
 
 export class Consumption {
+  id:number;
   createdAt: number;
   reportType: string;
   cumulative: Cumulative;
@@ -13,3 +14,5 @@ export class Consumption {
 export class ConsumptionDb extends Consumption {
   iqId: number;
 }
+
+

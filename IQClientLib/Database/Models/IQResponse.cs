@@ -3,6 +3,7 @@ using IQClientLib.Responses.Consumption;
 using IQClientLib.Responses.MeterReading;
 using IQClientLib.Responses.Status;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 namespace IQClientLib.Database.Models
@@ -75,6 +76,7 @@ namespace IQClientLib.Database.Models
                 case ResponseType.Inverters:
                     {
                         rawResponse = JsonConvert.DeserializeObject<List<Inverter>>(this.JsonData);
+                        
                         break;
                     }
                 case ResponseType.Meters:
@@ -105,6 +107,11 @@ namespace IQClientLib.Database.Models
 
 
             }
+            try { 
+
+                
+            }catch(Exception ex) { Console.WriteLine($"Exception occurred when setting id in ToRawResponse() {ex}"); }
+            
             return rawResponse;
         }
         //public object ToType<T>()

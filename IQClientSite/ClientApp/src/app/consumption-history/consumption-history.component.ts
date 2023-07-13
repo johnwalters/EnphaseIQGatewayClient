@@ -54,13 +54,13 @@ export class ConsumptionHistoryComponent implements OnInit {
     });
   }
 
-  buildConsumptionHistoryModelList(consumptionList:Array<ConsumptionDb>):void{
+  buildConsumptionHistoryModelList(consumptionList:Array<Consumption>):void{
     this.consumptionHistoryModelList = new Array<ConsumptionModel>;
     let firstWattHoursDelivered = 0;
     let previousWattHoursDelivered = 0;
     for(let item of consumptionList){
       let consumptionModel = new ConsumptionModel();
-      consumptionModel.iqId = item.iqId;
+      consumptionModel.iqId = item.id;
       consumptionModel.createdAt = item.createdAt;
       consumptionModel.reportType = item.reportType;
       consumptionModel.whDlvdCum = item.cumulative.whDlvdCum;

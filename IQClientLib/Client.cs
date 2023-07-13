@@ -166,46 +166,7 @@ namespace IQClientLib
             return apiResponse;
         }
 
-        public async Task<IEnumerable<IQResponse>> GetAllResponses(ResponseType? responseType, DateTime fromDate, DateTime toDate)
-        {
-            //TODO: GetAllResponses should probably not be a client responsibility
-            if (_repo != null)
-            {
-                return _repo.GetAllResponses(responseType, fromDate, toDate);
-            }
-            return new List<IQResponse>().AsEnumerable();
-
-        }
-
-        public IQResponse GetResponse(int id)
-        {
-            //TODO: GetResponse should probably not be a client responsibility
-            if (_repo != null)
-            {
-                return _repo.GetResponse(id);
-            }
-            return null;
-
-        }
-
-        public List<ConsumptionDb> GetConsumptionDb(int id)
-        {
-            //TODO: GetResponse should probably not be a client responsibility
-
-            var iqResponse = this.GetResponse(id);
-            List<Consumption> iqResponses = (List<Consumption>)iqResponse.ToRawResponse(ResponseType.Consumption);
-
-            List<ConsumptionDb> consumptionDbList = new List<ConsumptionDb>();
-            foreach (var iq in iqResponses)
-            {
-                var consumptionDb = new ConsumptionDb(id, iq);
-                consumptionDbList.Add(consumptionDb);
-            }
-            return consumptionDbList;
-
-
-
-        }
+        
 
 
 

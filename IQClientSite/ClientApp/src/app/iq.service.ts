@@ -46,12 +46,12 @@ export class IqService {
     return this.httpService.get<GetConsumptionResponse>('GetConsumption');
   }
 
-  getConsumptionDb(id:number): Observable<GetConsumptionDbResponse> {
+  getConsumptionDb(id:number): Observable<GetConsumptionResponse> {
     return this.httpService.get<GetConsumptionDbResponse>('GetConsumptionDb?id=' + id);
   }
 
 
-  getConsumptionHistory(responseType:ResponseType, fromDate:Date, toDate:Date): Observable<GetConsumptionDbResponse> {
+  getConsumptionHistory(responseType:ResponseType, fromDate:Date, toDate:Date): Observable<GetConsumptionResponse> {
     let fromDateFmatted = moment(fromDate).format('YYYY-MM-DD HH:mm:ss');
     let toDateFormatted = moment(toDate).format('YYYY-MM-DD HH:mm:ss');
     const uploadData = new FormData();
@@ -59,7 +59,7 @@ export class IqService {
     uploadData.append('fromDate', fromDateFmatted )
     uploadData.append('toDate', toDateFormatted )
 
-    return this.httpService.post<any>('GetHistory', uploadData);
+    return this.httpService.post<any>('GetConsumptionHistory', uploadData);
   }
 
 }
