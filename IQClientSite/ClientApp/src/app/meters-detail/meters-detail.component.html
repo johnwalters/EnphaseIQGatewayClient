@@ -1,0 +1,72 @@
+<!-- meters -->
+  <div class="row " *ngFor="let item of meters">
+    <div class="row mt-2">
+      <div class="col ">
+        <label>EID</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.eid}}</label>
+      </div>
+      <div class="col-9 ">
+
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>State</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.state}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Measurement Type</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.measurementType}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Phase Mode</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.phaseMode}}</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Phase Count</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.phaseCount}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Metering Status</label>
+      </div>
+      <div class="col ">
+        <label class="value">{{item.meteringStatus}}</label>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-3 "></div>
+      <div class="col ">
+        <label>Status Flags</label>
+      </div>
+      <div class="row ">
+        <div class="col ">
+          &nbsp;<label class="value">{{getStatusFlags(item.statusFlags)}}</label>
+        </div>
+      </div>
+    </div>
+  </div>

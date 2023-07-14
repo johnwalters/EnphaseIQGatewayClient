@@ -7,16 +7,7 @@ import { Status } from '../IQResponses/Status/Status';
 import { Consumption } from '../IQResponses/Consumption/Consumption';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment-timezone';
-import { ResponseType } from '../ResponseType';
-
-enum RequestType {
-  inverters,
-  meters,
-  meterreadings,
-  status,
-  consumption,
-}
-
+import { RequestType } from './RequestType';
 
 @Component({
   selector: 'app-detail',

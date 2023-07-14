@@ -13,6 +13,7 @@ import { RawComponent } from './raw/raw.component';
 import { DetailComponent } from './detail/detail.component';
 import { ConsumptionHistoryComponent } from './consumption-history/consumption-history.component';
 import { DbDetailComponent } from './db-detail/db-detail.component';
+import { MetersDetailComponent } from './meters-detail/meters-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DbDetailComponent } from './db-detail/db-detail.component';
     RawComponent,
     DetailComponent,
     ConsumptionHistoryComponent,
-    DbDetailComponent
+    DbDetailComponent,
+    MetersDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
