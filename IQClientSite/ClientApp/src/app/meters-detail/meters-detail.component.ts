@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Meter } from '../IQResponses/Meter';
+import { Helpers } from '../Helpers';
 
 @Component({
   selector: 'app-meters-detail',
@@ -17,11 +18,7 @@ export class MetersDetailComponent implements OnInit {
   }
 
   getStatusFlags(statusFlags: string[]): string {
-    let concatedFlags = '';
-    for (let flag of statusFlags) {
-      concatedFlags += ' ' + flag;
-    }
-    return concatedFlags;
+    return Helpers.getStatusFlags(statusFlags);
   }
 
 }

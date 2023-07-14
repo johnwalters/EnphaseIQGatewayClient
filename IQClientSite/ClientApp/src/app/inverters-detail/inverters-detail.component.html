@@ -1,0 +1,49 @@
+<div class="row " *ngFor="let item of inverters">
+  <div class="row mt-2">
+    <div class="col ">
+      <label>Serial Number</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.serialNumber}}</label>
+    </div>
+    <div class="col-9 ">
+
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>last Report Date</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{formatDate(item.lastReportDate)}}</label>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>last Report Watts</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.lastReportWatts}}</label>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Max Report Watts</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.maxReportWatts}}</label>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Dev Type</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.devType}}</label>
+    </div>
+  </div>
+</div>
