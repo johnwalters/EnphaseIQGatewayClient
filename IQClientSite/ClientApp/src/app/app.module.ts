@@ -18,6 +18,7 @@ import { InvertersDetailComponent } from './inverters-detail/inverters-detail.co
 import { ConsumptionDetailComponent } from './consumption-detail/consumption-detail.component';
 import { StatusDetailComponent } from './status-detail/status-detail.component';
 import { MeterReadingsDetailComponent } from './meter-readings-detail/meter-readings-detail.component';
+import { DetailModalComponent } from './detail-modal/detail-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MeterReadingsDetailComponent } from './meter-readings-detail/meter-read
     InvertersDetailComponent,
     ConsumptionDetailComponent,
     StatusDetailComponent,
-    MeterReadingsDetailComponent
+    MeterReadingsDetailComponent,
+    DetailModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,0 +1,82 @@
+<!-- <button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button> -->
+<div class="backdrop" *ngIf="isOpen"></div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: display }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <div class="col text-center">
+          <h5 class="modal-title">Response Detail</h5>
+        </div>
+      </div>
+      <div class="modal-body clickable" (click)="onCloseHandled()">
+
+        <!-- inveters -->
+        <div class="" *ngIf="selectedRequestType == RequestType.inverters">
+          <div class="row ">
+            <div class="col text-center">
+              <h3>Inverter Details</h3>
+            </div>
+          </div>
+          <!-- inveters detail -->
+          <app-inverters-detail [inverters]="inverters"></app-inverters-detail>
+        </div>
+
+
+        <!-- Status -->
+        <div class="" *ngIf="selectedRequestType == RequestType.status">
+          <div class="row mt-2">
+            <div class="col text-center">
+              <h3>Status Details</h3>
+            </div>
+          </div>
+          <app-status-detail [status]="status">
+          </app-status-detail>
+        </div>
+
+
+        <!-- meters -->
+        <div class="" *ngIf="selectedRequestType == RequestType.meters">
+          <div class="row ">
+            <div class="col text-center">
+              <h3>Meters Details</h3>
+            </div>
+          </div>
+          <app-meters-detail [meters]="meters">
+          </app-meters-detail>
+        </div>
+
+        <!-- meter readings -->
+        <div class="" *ngIf="selectedRequestType == RequestType.meterreadings">
+          <div class="row ">
+            <div class="col text-center">
+              <h3>Meter Reading Details</h3>
+            </div>
+          </div>
+          <app-meter-readings-detail [meterReadings]="meterReadings">
+
+          </app-meter-readings-detail>
+        </div>
+
+        <!-- consumption -->
+        <div class="" *ngIf="selectedRequestType == RequestType.consumption">
+          <div class="row ">
+            <div class="col text-center">
+              <h3>Consumption Details</h3>
+            </div>
+          </div>
+          <!-- consumption detail -->
+          <app-consumption-detail [consumptions]="consumptions">
+          </app-consumption-detail>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <div class="col text-start">
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="onCloseHandled()" >Cancel</button>
+          </div> -->
+        <div class="col text-end">
+          <button type="button" class="btn btn-success btn-sm" (click)="onCloseHandled()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

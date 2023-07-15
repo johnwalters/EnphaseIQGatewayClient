@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IqService } from '../iq.service';
 import { Consumption, ConsumptionDb } from '../IQResponses/Consumption/Consumption';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment-timezone';
 import { ResponseType } from '../ResponseType';
+import { DetailModalComponent } from '../detail-modal/detail-modal.component';
 
 export class ConsumptionModel {
   iqId: number;
@@ -20,6 +21,8 @@ export class ConsumptionModel {
   styleUrls: ['./consumption-history.component.css']
 })
 export class ConsumptionHistoryComponent implements OnInit {
+  @ViewChild(DetailModalComponent)
+  private detailModal: DetailModalComponent;
   rawData = '';
   spinnerMessage: string = '';
 
@@ -81,6 +84,21 @@ export class ConsumptionHistoryComponent implements OnInit {
 
       this.consumptionHistoryModelList.push(consumptionModel);
     }
+  }
+
+
+
+  popupConsumptionDb(id:number): void {
+    this.spinnerMessage = 'submitting getConsumption call';
+    this.errorMessage = '';
+    this.service.getConsumptionDb(id).subscribe((resp) => {
+      if (resp.isSuccessful) {
+        this.detailModal.popupConsumption(resp.payload);
+      } else {
+        this.errorMessage = 'Request failed. Check Logs.'
+      }
+      this.spinnerMessage = '';
+    });
   }
 
   formatDate(ephochDate: number): string {

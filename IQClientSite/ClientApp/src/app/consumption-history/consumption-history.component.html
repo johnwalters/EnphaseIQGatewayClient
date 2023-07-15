@@ -29,7 +29,8 @@
           >{{item.iqId}}</a>
         </td>
         <td>
-          {{formatDate(item.createdAt)}}
+          <span class="clickable clickable-link text-primary" (click)="popupConsumptionDb(item.iqId)">{{formatDate(item.createdAt)}}</span>
+
         </td>
         <td>
           {{item.whDlvdCum | number: "1.2-2"}}
@@ -42,3 +43,4 @@
         </td>
       </tr>
 </table>
+<app-detail-modal ></app-detail-modal>
