@@ -1,0 +1,768 @@
+<div class="status-container">
+  <div class="row">
+    <div class="col-3 ">
+      <label>connection.mqtt_state</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.connection.mqtt_state}}</label>
+    </div>
+    <div class="col-6 "></div>
+  </div>
+  <div class="row">
+    <div class="col-3 ">
+      <label>connection.prov_state</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.connection.prov_state}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+  <div class="row">
+    <div class="col-3 ">
+      <label>connection.auth_state</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.connection.auth_state}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+  <div class="row">
+    <div class="col-3 ">
+      <label>connection.sc_stream</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.connection.sc_stream}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+  <div class="row">
+    <div class="col-3 ">
+      <label>connection.sc_debug</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.connection.sc_debug}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.last_update</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{formatDate(status.meters.last_update)}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.soc</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.soc}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.main_relay_state</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.main_relay_state}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.gen_relay_state</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.gen_relay_state}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.backup_bat_mode</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.backup_bat_mode}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.backup_soc</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.backup_soc}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.is_split_phase</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.is_split_phase}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.phase_count</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.phase_count}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.enc_agg_soc</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.enc_agg_soc}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.enc_agg_energy</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.enc_agg_energy}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.acb_agg_soc</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.acb_agg_soc}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.acb_agg_energy</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.acb_agg_energy}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+
+  <!-- status meters pv -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_p_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_p_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_s_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_s_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_p_ph_a_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_p_ph_a_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_p_ph_b_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_p_ph_b_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_p_ph_c_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_p_ph_c_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_s_ph_a_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_s_ph_a_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_s_ph_b_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_s_ph_b_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.pv.agg_s_ph_c_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.pv.agg_s_ph_c_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <!-- --------------- -->
+
+
+  <!-- status meters storage -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_p_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_p_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_s_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_s_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_p_ph_a_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_p_ph_a_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_p_ph_b_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_p_ph_b_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_p_ph_c_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_p_ph_c_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_s_ph_a_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_s_ph_a_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_s_ph_b_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_s_ph_b_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.storage.agg_s_ph_c_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.storage.agg_s_ph_c_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <!-- --------------- -->
+  <!-- status meters storage -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_p_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_p_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_s_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_s_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_p_ph_a_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_p_ph_a_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_p_ph_b_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_p_ph_b_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_p_ph_c_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_p_ph_c_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_s_ph_a_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_s_ph_a_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_s_ph_b_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_s_ph_b_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.grid.agg_s_ph_c_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.grid.agg_s_ph_c_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <!-- --------------- -->
+
+
+
+
+  <!-- status meters load -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_p_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_p_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_s_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_s_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_p_ph_a_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_p_ph_a_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_p_ph_b_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_p_ph_b_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_p_ph_c_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_p_ph_c_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_s_ph_a_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_s_ph_a_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_s_ph_b_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_s_ph_b_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters load.agg_s_ph_c_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.load.agg_s_ph_c_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+
+
+
+  <!-- status meters generator -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_p_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_p_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_s_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_s_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_p_ph_a_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_p_ph_a_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_p_ph_b_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_p_ph_b_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_p_ph_c_mw</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_p_ph_c_mw}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_s_ph_a_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_s_ph_a_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_s_ph_b_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_s_ph_b_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>meters.generator.agg_s_ph_c_mva</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.meters.generator.agg_s_ph_c_mva}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>status.tasks.timestamp</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{formatDate(status.tasks.timestamp)}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>status.tasks.task_id</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.tasks.task_id}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <!-- status counters -->
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.main_CfgLoad</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.main_CfgLoad}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.main_CfgChanged</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.main_CfgChanged}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.main_taskUpdate</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.main_taskUpdate}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_publish</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_publish}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_respond</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_respond}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_msgarrvd</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_msgarrvd}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_create</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_create}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_setCallbacks</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_setCallbacks}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_connect</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_connect}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_connect_err</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_connect_err}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.mqttClient_subscribe</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.mqttClient_subscribe}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.sSL_Keys_Create</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.sSL_Keys_Create}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.sc_hdlDataPub</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.sc_hdlDataPub}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.sc_SendStreamCtrl</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.sc_SendStreamCtrl}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.sc_SendDemandRspCtrl</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.sc_SendDemandRspCtrl}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 ">
+      <label>counters.rest_Status</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{status.counters.rest_Status}}</label>
+    </div>
+    <div class="col-9 "></div>
+  </div>
+</div>

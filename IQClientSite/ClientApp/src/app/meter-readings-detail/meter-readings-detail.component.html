@@ -1,0 +1,313 @@
+<div class="row " *ngFor="let item of meterReadings">
+  <div class="row mt-2">
+    <div class="col ">
+      <label>Meter EID</label>
+    </div>
+    <div class="col-2 ">
+      <label class="value">{{item.eid}}</label>
+    </div>
+    <div class="col-8">
+
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col ">
+      <label>Timestamp</label>
+    </div>
+    <div class="col-2 ">
+      <label class="value">{{formatDate(item.timestamp)}}</label>
+    </div>
+    <div class="col-8 ">
+
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Active Energy Delivered</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.actEnergyDlvd}}</label>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Active Energy Received</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.actEnergyRcvd}}</label>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Apparent Energy</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.apparentEnergy}}</label>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Reactive Energy Lagg</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.reactEnergyLagg}}</label>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Reactive Energy Lead</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.reactEnergyLead}}</label>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Instantaneous Demand</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.instantaneousDemand}}</label>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Active Power</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.activePower}}</label>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Apparent Power</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.apparentPower}}</label>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Reactive Power</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.reactivePower}}</label>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Power Factor</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.pwrFactor}}</label>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Voltage</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.voltage}}</label>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Current</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.current}}</label>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-3 "></div>
+    <div class="col ">
+      <label>Frequency</label>
+    </div>
+    <div class="col ">
+      <label class="value">{{item.freq}}</label>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-4 "></div>
+    <div class="col ">
+      <label>Channels</label>
+    </div>
+    <div class="row " *ngFor="let channel of item.channels">
+      <div class="col-6 "></div>
+      <div class="col ">
+
+        <div class="row mt-2">
+          <div class="col ">
+            <label>Channel EID</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.eid}}</label>
+          </div>
+          <div class="col-9 ">
+
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Timestamp</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{formatDate(channel.timestamp)}}</label>
+          </div>
+
+        </div>
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Active Energy Delivered</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.actEnergyDlvd}}</label>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Active Energy Received</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.actEnergyRcvd}}</label>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Apparent Energy</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.apparentEnergy}}</label>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Reactive Energy Lagg</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.reactEnergyLagg}}</label>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Reactive Energy Lead</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.reactEnergyLead}}</label>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Instantaneous Demand</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.instantaneousDemand}}</label>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Active Power</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.activePower}}</label>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Apparent Power</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.apparentPower}}</label>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Reactive Power</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.reactivePower}}</label>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Power Factor</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.pwrFactor}}</label>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Voltage</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.voltage}}</label>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Current</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.current}}</label>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-3 "></div>
+          <div class="col ">
+            <label>Frequency</label>
+          </div>
+          <div class="col ">
+            <label class="value">{{channel.freq}}</label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
