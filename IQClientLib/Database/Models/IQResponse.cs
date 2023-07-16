@@ -12,6 +12,7 @@ namespace IQClientLib.Database.Models
     {
         public int Id { get; set; }
         public ResponseType ResponseType { get; set; }
+        public DateTime CreateDate { get; set; }
         public DateTime? InverterLastReportDate { get; set; }
         public DateTime? MeterReadingTimestamp { get; set; }
         public DateTime? MetersLastUpdate { get; set; }

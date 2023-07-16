@@ -19,6 +19,7 @@ import { ConsumptionDetailComponent } from './consumption-detail/consumption-det
 import { StatusDetailComponent } from './status-detail/status-detail.component';
 import { MeterReadingsDetailComponent } from './meter-readings-detail/meter-readings-detail.component';
 import { DetailModalComponent } from './detail-modal/detail-modal.component';
+import { IqHistoryComponent } from './iq-history/iq-history.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DetailModalComponent } from './detail-modal/detail-modal.component';
     ConsumptionDetailComponent,
     StatusDetailComponent,
     MeterReadingsDetailComponent,
-    DetailModalComponent
+    DetailModalComponent,
+    IqHistoryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -51,6 +53,7 @@ import { DetailModalComponent } from './detail-modal/detail-modal.component';
       { path: 'detail', component: DetailComponent },
       { path: 'detail/:action', component: DetailComponent },
       { path: 'consumptions', component: ConsumptionHistoryComponent },
+      { path: 'history', component: IqHistoryComponent },
       { path: 'dbdetail/:id', component: DbDetailComponent },
       { path: 'dbdetail', component: DbDetailComponent },
     ])

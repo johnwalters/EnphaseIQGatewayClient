@@ -1,6 +1,7 @@
 export class IQResponse {
   id: number;
   responseType: ResponseType;
+  createDate: Date;
   inverterLastReportDate: Date | null;
   meterReadingTimestamp: Date | null;
   metersLastUpdate: Date | null;

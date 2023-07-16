@@ -150,6 +150,31 @@ namespace IQClientSite.Controllers
             }
         }
 
+       public async Task<IActionResult> GetHistory(string fromDate, string toDate )
+        {
+            try
+            {
+                DateTime.TryParse(fromDate, out DateTime from);
+                DateTime.TryParse(toDate, out DateTime to);
+                var iqResponses = _service.GetAllResponses(from, to);
+                foreach(var iqItem in iqResponses)
+                {
+                    iqItem.JsonData = "";
+                }
+
+                var response = new GetAllResponsesResponse() { IsSuccessful = true, Payload = iqResponses.ToList() };
+                response.IsSuccessful = iqResponses != null;
+                var jsonResponse = Json(response);
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"exception occurred in IQApiController.GetHistory() - {ex}");
+                var response = Json(new GetAllResponsesResponse() { IsSuccessful = false });
+                return response;
+            }
+        }
+
         public async Task<IActionResult> GetConsumptionDb(int id)
         {
             try

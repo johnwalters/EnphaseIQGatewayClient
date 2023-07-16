@@ -24,6 +24,17 @@ namespace IQClientLib
 
         }
 
+        public IEnumerable<IQResponse> GetAllResponses(DateTime fromDate, DateTime toDate)
+        {
+
+            if (_repo != null)
+            {
+                return _repo.GetAllResponses(null, fromDate, toDate);
+            }
+            return new List<IQResponse>().AsEnumerable();
+
+        }
+
         public IQResponse GetResponse(int id)
         {
 
