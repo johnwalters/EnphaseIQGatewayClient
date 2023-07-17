@@ -29,13 +29,16 @@
         </td>
         <td>
           <span >{{item.createDate}}</span>
+          <span class="clickable clickable-link text-primary" (click)="popupIqDb(item.id,item.responseType)">{{item.createDate}}</span>
 
         </td>
         <td>
-          <span >{{item.responseType}}</span>
+          <span >{{getResponseTypeDescription(item.responseType)}}</span>
 
         </td>
 
       </tr>
 </table>
+<!-- <app-consumption-detail-modal ></app-consumption-detail-modal>
+<app-inverter-detail-modal ></app-inverter-detail-modal> -->
 <app-detail-modal ></app-detail-modal>

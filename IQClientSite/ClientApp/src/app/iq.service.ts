@@ -49,6 +49,9 @@ export class IqService {
   getConsumptionDb(id:number): Observable<GetConsumptionResponse> {
     return this.httpService.get<GetConsumptionDbResponse>('GetConsumptionDb?id=' + id);
   }
+  getInverterDb(id:number): Observable<GetInvertersResponse> {
+    return this.httpService.get<GetInvertersResponse>('getInverterDb?id=' + id);
+  }
 
 
   getConsumptionHistory(responseType:ResponseType, fromDate:Date, toDate:Date): Observable<GetConsumptionResponse> {

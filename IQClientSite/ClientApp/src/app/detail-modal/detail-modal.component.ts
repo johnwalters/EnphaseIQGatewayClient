@@ -38,6 +38,15 @@ export class DetailModalComponent implements OnInit {
     this.display = 'none';
   }
 
+  clearAll():void{
+    this.inverters = new Array<Inverter>();
+    this.meters = new Array<Meter>();
+    this.meterReadings = new Array<MeterReading>();
+    this.status = new Status();
+    this.consumptions = new Array<Consumption>();
+    this.selectedRequestType = RequestType.status;
+  }
+
   openModal() {
     this.isOpen = true;
     this.display = 'block';
@@ -49,12 +58,14 @@ export class DetailModalComponent implements OnInit {
   }
 
   popupInverters(inverters:Inverter[] ){
-    this.selectedRequestType = RequestType.inverters;
+    this.clearAll();
     this.inverters = inverters;
+    this.selectedRequestType = RequestType.inverters;
     this.openModal();
   }
 
   popupConsumption(consumptions:Consumption[] ){
+    this.clearAll();
     this.selectedRequestType = RequestType.consumption;
     this.consumptions = consumptions;
     this.openModal();

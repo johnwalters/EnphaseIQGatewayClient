@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { IQResponse } from '../IQResponses/IQResponse';
 import { ResponseType } from '../ResponseType';
 
+
 export class iqModel extends IQResponse {
 
 }
@@ -51,37 +52,34 @@ export class IqHistoryComponent implements OnInit {
     });
   }
 
-  // buildIqModelList(consumptionList:Array<IQResponse>):void{
-  //   this.consumptionHistoryModelList = new Array<ConsumptionModel>;
-  //   let firstWattHoursDelivered = 0;
-  //   let previousWattHoursDelivered = 0;
-  //   for(let item of consumptionList){
-  //     let consumptionModel = new ConsumptionModel();
-  //     consumptionModel.iqId = item.id;
-  //     consumptionModel.createdAt = item.createdAt;
-  //     consumptionModel.reportType = item.reportType;
-  //     consumptionModel.whDlvdCum = item.cumulative.whDlvdCum;
-  //     if(firstWattHoursDelivered){
-  //       consumptionModel.wattHoursDeliveredSinceFirst = consumptionModel.whDlvdCum - firstWattHoursDelivered;
-  //     } else {
-  //       consumptionModel.wattHoursDeliveredSinceFirst = 0;
-  //       firstWattHoursDelivered = consumptionModel.whDlvdCum;
-  //     }
 
-  //     if(previousWattHoursDelivered){
-  //       consumptionModel.wattHoursDeliveredSincePrevious = consumptionModel.whDlvdCum - previousWattHoursDelivered;
-  //     } else {
-  //       consumptionModel.wattHoursDeliveredSincePrevious = 0;
-
-  //     }
-  //     previousWattHoursDelivered = consumptionModel.whDlvdCum;
-
-  //     this.consumptionHistoryModelList.push(consumptionModel);
-  //   }
-
-  popupIqDb(id:number, responseType:ResponseType): void {
+  popupIqDb(id:number, responseType:any): void {
     // TODO: based on response type, get the response from db, and popup response
-    this.spinnerMessage = 'submitting getConsumption call';
+    switch(responseType){
+      case ResponseType.inverters:
+        this.popupInverterDb(id);
+        break;
+      case ResponseType.meters:
+      case ResponseType.meterReadings:
+      case ResponseType.status:
+      case ResponseType.consumption:
+        this.popupConsumptionDb(id);
+        break;
+    }
+    // this.spinnerMessage = 'getting history detail';
+    // this.errorMessage = '';
+    // this.service.getConsumptionDb(id).subscribe((resp) => {
+    //   if (resp.isSuccessful) {
+    //     this.detailModal.popupConsumption(resp.payload);
+    //   } else {
+    //     this.errorMessage = 'Request failed. Check Logs.'
+    //   }
+    //   this.spinnerMessage = '';
+    // });
+  }
+
+  popupConsumptionDb(id:number): void {
+    this.spinnerMessage = 'getting history detail';
     this.errorMessage = '';
     this.service.getConsumptionDb(id).subscribe((resp) => {
       if (resp.isSuccessful) {
@@ -93,8 +91,34 @@ export class IqHistoryComponent implements OnInit {
     });
   }
 
-  // formatDate(ephochDate: number): string {
-  //   return moment(new Date(ephochDate * 1000)).format('MM-DD-YY h:mm:ss A');
-  // }
+  popupInverterDb(id:number): void {
+    this.spinnerMessage = 'submitting Inverter call';
+    this.errorMessage = '';
+    this.service.getInverterDb(id).subscribe((resp) => {
+      if (resp.isSuccessful) {
+        this.detailModal.popupInverters(resp.payload);
+      } else {
+        this.errorMessage = 'Request failed. Check Logs.'
+      }
+      this.spinnerMessage = '';
+    });
+  }
+
+  getResponseTypeDescription(responseType:any):string{
+    switch(responseType){
+      case ResponseType.inverters:
+        return "Inverter";
+      case ResponseType.meters:
+        return "Meter";
+      case ResponseType.meterReadings:
+        return "Meter Readings";
+      case ResponseType.status:
+        return "Status";
+      case ResponseType.consumption:
+        return "Consumption";
+    }
+    return '';
+  }
+
 
 }

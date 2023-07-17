@@ -21,6 +21,7 @@ import { MeterReadingsDetailComponent } from './meter-readings-detail/meter-read
 import { DetailModalComponent } from './detail-modal/detail-modal.component';
 import { IqHistoryComponent } from './iq-history/iq-history.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,7 @@ import { IqHistoryComponent } from './iq-history/iq-history.component';
     StatusDetailComponent,
     MeterReadingsDetailComponent,
     DetailModalComponent,
-    IqHistoryComponent
+    IqHistoryComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
