@@ -2,6 +2,8 @@
 using IQClientLib.Database.Models;
 using IQClientLib.Responses;
 using IQClientLib.Responses.Consumption;
+using IQClientLib.Responses.MeterReading;
+using IQClientLib.Responses.Status;
 
 namespace IQClientLib
 {
@@ -35,7 +37,7 @@ namespace IQClientLib
 
         }
 
-        public IQResponse GetResponse(int id)
+        private IQResponse GetResponse(int id)
         {
 
             if (_repo != null)
@@ -51,7 +53,7 @@ namespace IQClientLib
 
 
             var dbResponse = this.GetResponse(id);
-            List<Consumption> consumptionsForId = (List<Consumption>)dbResponse.ToRawResponse(ResponseType.Consumption);
+            var consumptionsForId = (List<Consumption>)dbResponse.ToRawResponse(ResponseType.Consumption);
             foreach (var iq in consumptionsForId)
             {
                 iq.Id = id;
@@ -63,13 +65,41 @@ namespace IQClientLib
         public List<Inverter> GetInverterDb(int id)
         {
             var dbResponse = this.GetResponse(id);
-            List<Inverter> invertersForId = (List<Inverter>)dbResponse.ToRawResponse(ResponseType.Inverters);
+            var invertersForId = (List<Inverter>)dbResponse.ToRawResponse(ResponseType.Inverters);
             foreach (var iq in invertersForId)
             {
                 iq.Id = id;
             }
             return invertersForId;
 
+        }
+
+        public List<Meter> GetMeterDb(int id)
+        {
+            var dbResponse = this.GetResponse(id);
+            var metersForId = (List<Meter>)dbResponse.ToRawResponse(ResponseType.Meters);
+            foreach (var iq in metersForId)
+            {
+                iq.Id = id;
+            }
+            return metersForId;
+        }
+        public List<MeterReading> GetMeterReadingDb(int id)
+        {
+            var dbResponse = this.GetResponse(id);
+            var meterReadingsForId = (List<MeterReading>)dbResponse.ToRawResponse(ResponseType.MeterReadings);
+            foreach (var iq in meterReadingsForId)
+            {
+                iq.Id = id;
+            }
+            return meterReadingsForId;
+        }
+        public Status GetStatusDb(int id)
+        {
+            var dbResponse = this.GetResponse(id);
+            var statusForId = (Status)dbResponse.ToRawResponse(ResponseType.Status);
+            statusForId.Id = id;
+            return statusForId;
         }
     }
 }

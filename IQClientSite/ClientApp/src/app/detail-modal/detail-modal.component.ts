@@ -64,6 +64,27 @@ export class DetailModalComponent implements OnInit {
     this.openModal();
   }
 
+  popupMeters(meters:Meter[] ){
+    this.clearAll();
+    this.meters = meters;
+    this.selectedRequestType = RequestType.meters;
+    this.openModal();
+  }
+
+  popupMeterReadings(meterReadings:MeterReading[] ){
+    this.clearAll();
+    this.meterReadings = meterReadings;
+    this.selectedRequestType = RequestType.meterreadings;
+    this.openModal();
+  }
+
+  popupStatus(status:Status ){
+    this.clearAll();
+    this.status = status;
+    this.selectedRequestType = RequestType.status;
+    this.openModal();
+  }
+
   popupConsumption(consumptions:Consumption[] ){
     this.clearAll();
     this.selectedRequestType = RequestType.consumption;

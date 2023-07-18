@@ -244,6 +244,63 @@ namespace IQClientSite.Controllers
                 return response;
             }
         }
+
+        public async Task<IActionResult> GetMeterDb(int id)
+        {
+            try
+            {
+                var inverterDbList = _service.GetMeterDb(id);
+
+                var response = new GetMetersResponse() { IsSuccessful = true, Payload = inverterDbList };
+                response.IsSuccessful = inverterDbList != null;
+                var jsonResponse = Json(response);
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"exception occurred in IQApiController.GetMeterDb() - {ex}");
+                var response = Json(new GetMetersResponse() { IsSuccessful = false });
+                return response;
+            }
+        }
+
+        public async Task<IActionResult> GetMeterReadingDb(int id)
+        {
+            try
+            {
+                var meterReadingList = _service.GetMeterReadingDb(id);
+
+                var response = new GetMeterReadingsResponse() { IsSuccessful = true, Payload = meterReadingList };
+                response.IsSuccessful = meterReadingList != null;
+                var jsonResponse = Json(response);
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"exception occurred in IQApiController.GetMeterReadingDb() - {ex}");
+                var response = Json(new GetMeterReadingsResponse() { IsSuccessful = false });
+                return response;
+            }
+        }
+
+        public async Task<IActionResult> GetStatusDb(int id)
+        {
+            try
+            {
+                var statusDb = _service.GetStatusDb(id);
+
+                var response = new GetStatusResponse() { IsSuccessful = true, Payload = statusDb };
+                response.IsSuccessful = statusDb != null;
+                var jsonResponse = Json(response);
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"exception occurred in IQApiController.GetStatusDb() - {ex}");
+                var response = Json(new GetStatusResponse() { IsSuccessful = false });
+                return response;
+            }
+        }
     }
 
     public class IQApiResponse

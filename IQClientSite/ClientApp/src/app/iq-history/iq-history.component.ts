@@ -60,8 +60,14 @@ export class IqHistoryComponent implements OnInit {
         this.popupInverterDb(id);
         break;
       case ResponseType.meters:
+        this.popupMeterDb(id);
+        break;
       case ResponseType.meterReadings:
+        this.popupMeterReadingDb(id);
+        break;
       case ResponseType.status:
+        this.popupStatusDb(id);
+        break;
       case ResponseType.consumption:
         this.popupConsumptionDb(id);
         break;
@@ -97,6 +103,45 @@ export class IqHistoryComponent implements OnInit {
     this.service.getInverterDb(id).subscribe((resp) => {
       if (resp.isSuccessful) {
         this.detailModal.popupInverters(resp.payload);
+      } else {
+        this.errorMessage = 'Request failed. Check Logs.'
+      }
+      this.spinnerMessage = '';
+    });
+  }
+
+  popupMeterDb(id:number): void {
+    this.spinnerMessage = 'submitting Meter call';
+    this.errorMessage = '';
+    this.service.getMeterDb(id).subscribe((resp) => {
+      if (resp.isSuccessful) {
+        this.detailModal.popupMeters(resp.payload);
+      } else {
+        this.errorMessage = 'Request failed. Check Logs.'
+      }
+      this.spinnerMessage = '';
+    });
+  }
+
+  popupMeterReadingDb(id:number): void {
+    this.spinnerMessage = 'submitting MeterReading call';
+    this.errorMessage = '';
+    this.service.getMeterReadingsDb(id).subscribe((resp) => {
+      if (resp.isSuccessful) {
+        this.detailModal.popupMeterReadings(resp.payload);
+      } else {
+        this.errorMessage = 'Request failed. Check Logs.'
+      }
+      this.spinnerMessage = '';
+    });
+  }
+
+  popupStatusDb(id:number): void {
+    this.spinnerMessage = 'submitting Status call';
+    this.errorMessage = '';
+    this.service.getStatusDb(id).subscribe((resp) => {
+      if (resp.isSuccessful) {
+        this.detailModal.popupStatus(resp.payload);
       } else {
         this.errorMessage = 'Request failed. Check Logs.'
       }

@@ -82,7 +82,7 @@ namespace IQClientLib.Database.Models
                     }
                 case ResponseType.Meters:
                     {
-                        rawResponse = JsonConvert.DeserializeObject<List<Meters>>(this.JsonData);
+                        rawResponse = JsonConvert.DeserializeObject<List<Meter>>(this.JsonData);
                         break;
                     }
                 case ResponseType.MeterReadings:
