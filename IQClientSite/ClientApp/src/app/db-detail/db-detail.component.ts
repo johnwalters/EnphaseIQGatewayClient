@@ -7,6 +7,7 @@ import { Status } from '../IQResponses/Status/Status';
 import { Consumption } from '../IQResponses/Consumption/Consumption';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment-timezone';
+import { DatabaseService } from '../database.service';
 
 
 enum RequestType {
@@ -42,7 +43,7 @@ export class DbDetailComponent implements OnInit {
   id:number = 0;
 
   constructor(
-    private service: IqService,
+    private service: DatabaseService,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -56,65 +57,7 @@ export class DbDetailComponent implements OnInit {
     });
   }
 
-  // getInverters(): void {
-  //   this.spinnerMessage = 'submitting getInverters call';
-  //   this.errorMessage = '';
-  //   this.service.getInverters().subscribe((resp) => {
-  //     this.rawData = JSON.stringify(resp);
-  //     if (resp.isSuccessful) {
-  //       this.inverters = resp.payload;
-  //       console.log(this.inverters);
-  //     } else {
-  //       this.errorMessage = 'Request failed. Check Logs.'
-  //     }
-  //     this.spinnerMessage = '';
-  //   });
-  // }
 
-  // getMeters(): void {
-  //   this.spinnerMessage = 'submitting getMeters call';
-  //   this.errorMessage = '';
-  //   this.service.getMeters().subscribe((resp) => {
-  //     this.rawData = JSON.stringify(resp);
-  //     if (resp.isSuccessful) {
-  //       this.meters = resp.payload;
-  //       console.debug(this.meters);
-  //     } else {
-  //       this.errorMessage = 'Request failed. Check Logs.'
-  //     }
-  //     this.spinnerMessage = '';
-  //   });
-  // }
-
-  // getMeterReadings(): void {
-  //   this.spinnerMessage = 'submitting getMeterReadings call';
-  //   this.errorMessage = '';
-  //   this.service.getMeterReadings().subscribe((resp) => {
-  //     this.rawData = JSON.stringify(resp);
-  //     if (resp.isSuccessful) {
-  //       this.meterReadings = resp.payload;
-  //       console.debug(this.meterReadings);
-  //     } else {
-  //       this.errorMessage = 'Request failed. Check Logs.'
-  //     }
-  //     this.spinnerMessage = '';
-  //   });
-  // }
-
-  // getStatus(): void {
-  //   this.spinnerMessage = 'submitting getStatus call';
-  //   this.errorMessage = '';
-  //   this.service.getStatus().subscribe((resp) => {
-  //     this.rawData = JSON.stringify(resp);
-  //     if (resp.isSuccessful) {
-  //       this.status = resp.payload;
-  //       console.debug(this.status);
-  //     } else {
-  //       this.errorMessage = 'Request failed. Check Logs.'
-  //     }
-  //     this.spinnerMessage = '';
-  //   });
-  // }
 
   getConsumptionDb(): void {
     this.spinnerMessage = 'submitting getConsumption call';

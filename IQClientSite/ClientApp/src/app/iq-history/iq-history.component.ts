@@ -4,6 +4,7 @@ import { IqService } from '../iq.service';
 import * as moment from 'moment';
 import { IQResponse } from '../IQResponses/IQResponse';
 import { ResponseType } from '../ResponseType';
+import { DatabaseService } from '../database.service';
 
 
 export class iqModel extends IQResponse {
@@ -29,7 +30,7 @@ export class IqHistoryComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private service: IqService,
+    private service: DatabaseService,
   ) {}
 
   ngOnInit(): void {

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment-timezone';
 import { ResponseType } from '../ResponseType';
 import { DetailModalComponent } from '../detail-modal/detail-modal.component';
+import { DatabaseService } from '../database.service';
 
 export class ConsumptionModel {
   iqId: number;
@@ -33,8 +34,7 @@ export class ConsumptionHistoryComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private service: IqService,
-    private activatedRoute: ActivatedRoute
+    private service: DatabaseService
   ) {}
 
   ngOnInit(): void {
